@@ -236,7 +236,7 @@ async function getPostsFromUserSet(template, req, res) {
 	} else {
 		result = await utils.promiseParallel({
 			itemCount: getItemCount(sets, data, settings),
-			itemData: getItemData(sets, data, req, start, stop),
+			itemData: getItemData({sets, data, req, start, stop}),
 		});
 	}
 	const { itemCount, itemData } = result;
@@ -273,7 +273,7 @@ async function getPostsFromUserSet(template, req, res) {
 	res.render(template, payload);
 }
 
-async function getItemData(sets, data, req, start, stop) {
+async function getItemData({sets, data, req, start, stop}) {
 	if (data.getTopics) {
 		return await data.getTopics(sets, req, start, stop);
 	}
