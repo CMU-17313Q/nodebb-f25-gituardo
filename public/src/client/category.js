@@ -68,7 +68,7 @@ define('forum/category', [
 							// data from the form prepared for API
 							const formData = modal.find('form').serializeObject();
 							// make sure the category name is present, can't be empty
-    						if (!formData.name) {
+							if (!formData.name) {
 								alerts.error('Subcategory name is required.');
 								return false;
 							}
