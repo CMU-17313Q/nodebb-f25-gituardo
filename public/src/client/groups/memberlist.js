@@ -38,21 +38,9 @@ define('forum/groups/memberlist', ['api', 'bootbox', 'alerts', 'helpers'], funct
 				const modal = bootbox.dialog({
 					title: '[[groups:details.add-member]]',
 					message: html,
-					buttons: {
-						OK: {
-							label: '[[groups:details.add-member]]',
-							callback: function () {
-								const users = [];
-								modal.find('[data-uid][data-selected]').each(function (index, el) {
-									users.push(foundUsers[$(el).attr('data-uid')]);
-								});
-								addUsersToGroup(users).then(() => {
-									modal.modal('hide');
-								});
-							},
-						},
-					},
 				});
+	
+				// Toggle selection when clicking on a user
 				modal.on('click', '[data-username]', function () {
 					const isSelected = $(this).attr('data-selected') === '1';
 					if (isSelected) {
@@ -62,6 +50,8 @@ define('forum/groups/memberlist', ['api', 'bootbox', 'alerts', 'helpers'], funct
 					}
 					$(this).find('i').toggleClass('invisible');
 				});
+	
+				// Search users
 				modal.find('input').on('keyup', function () {
 					api.get('/api/users', {
 						query: $(this).val(),
@@ -73,9 +63,25 @@ define('forum/groups/memberlist', ['api', 'bootbox', 'alerts', 'helpers'], funct
 						result.users.forEach(function (user) {
 							foundUsers[user.uid] = user;
 						});
-						app.parseAndTranslate('admin/partials/groups/add-members', 'users', { users: result.users }, function (html) {
-							modal.find('#search-result').html(html);
-						});
+						app.parseAndTranslate(
+							'admin/partials/groups/add-members',
+							'users',
+							{ users: result.users },
+							function (html) {
+								modal.find('#search-result').html(html);
+							}
+						);
+					});
+				});
+	
+				// confirm button inside template
+				modal.on('click', '#confirm-add-member', function () {
+					const users = [];
+					modal.find('[data-uid][data-selected]').each(function (index, el) {
+						users.push(foundUsers[$(el).attr('data-uid')]);
+					});
+					addUsersToGroup(users).then(() => {
+						modal.modal('hide');
 					});
 				});
 			});
