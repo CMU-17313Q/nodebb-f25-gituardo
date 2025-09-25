@@ -1,6 +1,5 @@
 {{{ if config.loggedIn }}}
 
-{{!-- frontend 'add subcategory' button --}}
 <button type="button" class="btn btn-primary" id="add-sub-category"> Add Subcategory </button>
 
 <div class="btn-group bottom-sheet" component="topic/watch">
