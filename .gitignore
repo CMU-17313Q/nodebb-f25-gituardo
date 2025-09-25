@@ -76,5 +76,3 @@ test.sh
 .docker/**
 !**/.gitkeep
 
-#tests
-/test/
