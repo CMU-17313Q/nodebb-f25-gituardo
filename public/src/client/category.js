@@ -69,8 +69,8 @@ define('forum/category', [
 							const formData = modal.find('form').serializeObject();
 							// make sure the category name is present, can't be empty
 							if (!formData.name) {
-								alerts.error('Subcategory name is required.');
-								return false;
+								//if the name is missing, send a status
+								return res.status(400).json({ error: 'Category name is required' });
 							}
 							formData.uid = app.user.uid;
 							formData.parentCid = ajaxify.data.cid;
