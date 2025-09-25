@@ -67,6 +67,11 @@ define('forum/category', [
 						callback: function () {
 							// data from the form prepared for API
 							const formData = modal.find('form').serializeObject();
+							// make sure the category name is present, can't be empty
+    						if (!formData.name || !formData.name.trim()) {
+        						alerts.error('Subcategory name is required.');
+        						return false;
+    						}
 							formData.uid = app.user.uid;
 							formData.parentCid = ajaxify.data.cid;
 							formData.description = formData.description || '';
