@@ -49,16 +49,21 @@ categoriesAPI.get = async function (caller, data) {
 };
 
 categoriesAPI.create = async function (caller, data) {
-	const { parentCid } = data;
+	//If there is no parentCid we assume its 0 (admin)
+	const parentCid = data.parentCid || 0;
 	// Check that only admins can create top-level categories
 	if (parseInt(parentCid, 10) === 0) {
 		await hasAdminPrivilege(caller.uid);
 	} else {
-		// Check the new privilege for the Subcategories
-		const allowed = await privileges.categories.can('subcategories:create', parentCid, caller.uid);
-		//Give an error to the user if they can't use this function
-		if (!allowed) {
-			throw new Error('[[error:no-privileges]]');
+		const isAdmin = await user.isAdministrator(caller.uid);
+		// Skip the check if the user is an admin
+		if (!isAdmin) {
+			// Check the new privilege for the Subcategories 
+			const allowed = await privileges.categories.can('subcategories:create', parentCid, caller.uid);
+			//Give an error to the user if they can't use this function
+			if (!allowed) {
+				throw new Error('[[error:no-privileges]]');
+			}
 		}
 	}
 
