@@ -3,6 +3,7 @@
 const categories = require('../../categories');
 const meta = require('../../meta');
 const api = require('../../api');
+const privileges = require('../../privileges');
 
 const helpers = require('../helpers');
 
@@ -16,7 +17,22 @@ Categories.get = async (req, res) => {
 	helpers.formatApiResponse(200, res, await api.categories.get(req, req.params));
 };
 
-Categories.create = async (req, res) => {
+//We used ChatGPT to help alter this function which will check the user privilege
+Categories.create = async (req, res, next) => {
+	const { parentCid } = req.body;
+
+	// Prevent non-admins from making main categories
+	if (parseInt(parentCid, 10) === 0 && !req.user?.isAdmin) {
+		return next(new Error('Only admins can create categories.'));
+	}
+	
+	//Check if the user has the new privilege to create a sub-category
+	const allowed = await privileges.categories.can('topics:subcategories_create', parentCid, req.user.uid);
+	//Error if they don't have permission
+	if (!allowed) {
+		return next(new Error('You do not have permission to create sub-categories.'));
+	}
+
 	const response = await api.categories.create(req, req.body);
 	helpers.formatApiResponse(200, res, response);
 };

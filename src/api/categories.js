@@ -49,7 +49,18 @@ categoriesAPI.get = async function (caller, data) {
 };
 
 categoriesAPI.create = async function (caller, data) {
-	await hasAdminPrivilege(caller.uid);
+	const { parentCid } = data;
+	// Check that only admins can create top-level categories
+	if (parseInt(parentCid, 10) === 0) {
+		await hasAdminPrivilege(caller.uid);
+	} else {
+		// Check the new privilege for the Subcategories
+		const allowed = await privileges.categories.can('topics:subcategories_create', parentCid, caller.uid);
+		//Give an error to the user if they can't use this function
+		if (!allowed) {
+			throw new Error('[[error:no-privileges]]');
+		}
+	}
 
 	const response = await categories.create(data);
 	const categoryObjs = await categories.getCategories([response.cid]);
