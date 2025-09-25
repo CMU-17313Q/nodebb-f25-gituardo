@@ -245,7 +245,7 @@ describe('API', async () => {
 		meta.config.activitypubEnabled = 1;
 
 		// Create a category
-		const testCategory = await categories.create({ name: 'test' });
+		const testCategory = await categories.create({ name: 'test', parentCid: 0 });
 
 		// Post a new topic
 		await topics.post({
