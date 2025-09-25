@@ -352,7 +352,7 @@ Emailer.sendToEmail = async (template, email, language, params) => {
 	} catch (err) {
 		if (err.code === 'ENOENT' && usingFallback) {
 			Emailer.fallbackNotFound = true;
-			throw new Error('[[error:sendmail-not-found]]');
+			//throw new Error('[[error:sendmail-not-found]]');
 		} else {
 			throw err;
 		}
