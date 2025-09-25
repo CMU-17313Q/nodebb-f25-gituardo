@@ -52,7 +52,7 @@ categoriesAPI.create = async function (caller, data) {
 	// Validate that name is provided
 	if (!data.name || !data.name.trim()) {
 		const err = new Error('[[error:invalid-data]]');
-		err.status = 400;
+		err.status = 403;
 		throw err;
 	}
 

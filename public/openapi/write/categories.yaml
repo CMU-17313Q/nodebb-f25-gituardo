@@ -86,3 +86,15 @@ post:
                           type: string
                       unread-class:
                         type: string
+    '403':
+      description: User does not have permission to create sub-categories
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: ../components/schemas/Status.yaml#/Status
+              error:
+                type: string
+                example: You do not have permission to create sub-categories.
