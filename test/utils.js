@@ -1,6 +1,6 @@
 'use strict';
 
-
+require.main.require('./src/emailer').send = async () => {};
 const assert = require('assert');
 const validator = require('validator');
 const { JSDOM } = require('jsdom');
