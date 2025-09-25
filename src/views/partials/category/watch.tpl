@@ -1,13 +1,4 @@
 {{{ if config.loggedIn }}}
-<div class="btn-group">
-    <a href="/category/create?parent={cid}&type=homework"
-       id="add-sub-category"
-       class="btn btn-primary btn-sm text-nowrap"
-       data-ajaxify="false"
-       role="button">
-        Add Sub-Category
-    </a>
-</div>
 <div class="btn-group bottom-sheet" component="topic/watch">
 	<button class="btn btn-ghost btn-sm ff-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
 		<span component="category/watching/menu" class="d-flex gap-2 align-items-center {{{ if !./isWatched }}} hidden{{{ end }}}"><i class="fa fa-fw fa-bell-o text-primary"></i><span class="visible-md-inline visible-lg-inline fw-semibold">[[category:watching]]</span></span>
