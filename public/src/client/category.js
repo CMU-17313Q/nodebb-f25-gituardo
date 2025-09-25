@@ -43,6 +43,52 @@ define('forum/category', [
 
 		handleDescription();
 
+		/// We used AI - ChatGpt for this code part
+		// when the button is clicked
+		$('#add-sub-category').on('click', function () {
+		const modal = bootbox.dialog({
+			title: 'Create subcategory',
+			message: `
+				<form id="create-subcategory-form">
+					<div class="form-group">
+						<label>Subcategory name</label>
+						 <input class="form-control" name="name" required />
+					</div>
+					<div class="form-group">
+						<label>Description</label>
+						<input class="form-control" name="description" />
+					</div>
+				</form>
+			`,
+			buttons: {
+				save: {
+					label: 'Create',
+					className: 'btn-cat',
+					//when user clicks "create"
+					callback: function () {
+						// data from the form prepared for API
+						const formData = modal.find('form').serializeObject();
+						formData.uid = app.user.uid;
+						formData.parentCid = ajaxify.data.cid;
+						formData.description = formData.description || '';
+						formData.icon = 'fa-comments';
+						
+						//sending a request to create subcategory
+						api.post('/categories', formData, function (err) {
+							if (err) {
+								return alerts.error(err);
+							}
+							alerts.success('Subcategory was created');
+							//refresh the page to show new subcategory
+							ajaxify.refresh();
+						});
+						return false;
+					},
+				},
+			},
+		});
+	});
+
 		categorySelector.init($('[component="category-selector"]'), {
 			privilege: 'find',
 			parentCid: ajaxify.data.cid,

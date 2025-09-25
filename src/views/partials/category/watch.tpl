@@ -1,4 +1,8 @@
 {{{ if config.loggedIn }}}
+
+{{!-- frontend 'add subcategory' button --}}
+<button type="button" class="btn btn-primary" id="add-sub-category"> Add Subcategory </button>
+
 <div class="btn-group bottom-sheet" component="topic/watch">
 	<button class="btn btn-ghost btn-sm ff-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
 		<span component="category/watching/menu" class="d-flex gap-2 align-items-center {{{ if !./isWatched }}} hidden{{{ end }}}"><i class="fa fa-fw fa-bell-o text-primary"></i><span class="visible-md-inline visible-lg-inline fw-semibold">[[category:watching]]</span></span>
