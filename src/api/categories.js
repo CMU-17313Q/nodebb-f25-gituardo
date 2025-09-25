@@ -49,13 +49,6 @@ categoriesAPI.get = async function (caller, data) {
 };
 
 categoriesAPI.create = async function (caller, data) {
-	// Validate that name is provided
-	if (!data.name || !data.name.trim()) {
-		const err = new Error('[[error:invalid-data]]');
-		err.status = 200;
-		throw err;
-	}
-
 	//If there is no parentCid we assume its 0 (admin)
 	const parentCid = data.parentCid || 0;
 	// Check that only admins can create top-level categories
