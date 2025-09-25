@@ -76,17 +76,17 @@ define('forum/category', [
 							api.post('/categories', formData, function (err) {
 								if (err) {
 									return alerts.error(err);
-							}
-							alerts.success('Subcategory was created');
-							//refresh the page to show new subcategory
-							ajaxify.refresh();
-						});
-						return false;
+								}
+								alerts.success('Subcategory was created');
+								//refresh the page to show new subcategory
+								ajaxify.refresh();
+							});
+							return false;
+						},
 					},
 				},
-			},
+			});
 		});
-	});
 
 		categorySelector.init($('[component="category-selector"]'), {
 			privilege: 'find',
