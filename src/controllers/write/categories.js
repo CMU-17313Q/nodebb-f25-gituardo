@@ -23,7 +23,7 @@ Categories.create = async (req, res) => {
 
 	// Prevent non-admins from making main categories
 	if (parseInt(parentCid, 10) === 0 && !req.user?.isAdmin) {
-		return helpers.formatApiResponse(403, res, {
+		return helpers.formatApiResponse(200, res, {
 			error: 'Only admins can create categories.',
 		});
 	}
@@ -32,7 +32,7 @@ Categories.create = async (req, res) => {
 	const allowed = await privileges.categories.can('subcategories:create', parentCid, req.user.uid);
 	//Error if user has no permission
 	if (!allowed) {
-		return helpers.formatApiResponse(403, res, {
+		return helpers.formatApiResponse(200, res, {
 			error: 'You do not have permission to create sub-categories.',
 		});
 	}
