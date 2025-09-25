@@ -22,7 +22,7 @@ const _privilegeMap = new Map([
 	['read', { label: '[[admin/manage/privileges:access-category]]', type: 'viewing' }],
 	['topics:read', { label: '[[admin/manage/privileges:access-topics]]', type: 'viewing' }],
 	['topics:create', { label: '[[admin/manage/privileges:create-topics]]', type: 'posting' }],
-	['topics:subcategories_create', { label: '[[admin/manage/privileges:create-subcategories]]', type: 'posting' }],
+	['subcategories:create', { label: '[[admin/manage/privileges:create-subcategories]]', type: 'posting' }],
 	['topics:reply', { label: '[[admin/manage/privileges:reply-to-topics]]', type: 'posting' }],
 	['topics:schedule', { label: '[[admin/manage/privileges:schedule-topics]]', type: 'posting' }],
 	['topics:tag', { label: '[[admin/manage/privileges:tag-topics]]', type: 'posting' }],

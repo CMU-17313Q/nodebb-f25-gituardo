@@ -55,7 +55,7 @@ categoriesAPI.create = async function (caller, data) {
 		await hasAdminPrivilege(caller.uid);
 	} else {
 		// Check the new privilege for the Subcategories
-		const allowed = await privileges.categories.can('topics:subcategories_create', parentCid, caller.uid);
+		const allowed = await privileges.categories.can('subcategories:create', parentCid, caller.uid);
 		//Give an error to the user if they can't use this function
 		if (!allowed) {
 			throw new Error('[[error:no-privileges]]');

@@ -27,7 +27,7 @@ Categories.create = async (req, res, next) => {
 	}
 	
 	//Check if the user has the new privilege to create a sub-category
-	const allowed = await privileges.categories.can('topics:subcategories_create', parentCid, req.user.uid);
+	const allowed = await privileges.categories.can('subcategories:create', parentCid, req.user.uid);
 	//Error if they don't have permission
 	if (!allowed) {
 		return next(new Error('You do not have permission to create sub-categories.'));
