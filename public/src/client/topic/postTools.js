@@ -99,6 +99,22 @@ define('forum/topic/postTools', [
 
 		postEl.toggleClass('endorsed', isEndorsed);
 
+		// Toggle the badge to the left of the post index
+		const badgeSelector = '.post-index-endorsed-badge';
+		if (isEndorsed) {
+			//if (!postEl.find(badgeSelector).length) {
+			//const postIndex = postEl.find('.post-index.text-muted.d-none.d-md-inline');
+			//$('<span class="badge bg-success post-index-endorsed-badge me-2" title=
+			// "Endorsed by staff">Endorsed by OP</span>')
+			//.insertBefore(postIndex);
+			//}
+			if (!isEndorsed) {
+				console.log('a');
+			}
+		} else {
+			postEl.find(badgeSelector).remove();
+		}
+
 		// Invalidate the tools dropdown so it's re-rendered with the correct buttons
 		PostTools.removeMenu(postEl);
 		hooks.fire('action:post.toggleEndorse', { pid: pid, isEndorsed: isEndorsed });
