@@ -135,24 +135,13 @@ module.exports = function (User) {
 	}
 
 	async function filterAndSortUids(uids, data) {
-		uids = uids.filter(uid => parseInt(uid, 10) || activitypub.helpers.isUri(uid));
-		let filters = data.filters || [];
-		filters = Array.isArray(filters) ? filters : [data.filters];
-		const fields = [];
+		uids = filterValidUids(uids);
 
-		if (data.sortBy) {
-			fields.push(data.sortBy);
-		}
-
-		filters.forEach((filter) => {
-			if (filterFieldMap[filter]) {
-				fields.push(...filterFieldMap[filter]);
-			}
-		});
+		const filters = normalizeFilters(data.filters);
+		const fields = collectFields(filters, data.sortBy);
 
 		if (data.groupName) {
-			const isMembers = await groups.isMembers(uids, data.groupName);
-			uids = uids.filter((uid, index) => isMembers[index]);
+			uids = await filterByGroup(uids, data.groupName);
 		}
 
 		if (!fields.length) {
@@ -160,19 +149,13 @@ module.exports = function (User) {
 		}
 
 		if (filters.includes('banned') || filters.includes('notbanned')) {
-			const isMembersOfBanned = await groups.isMembers(uids, groups.BANNED_USERS);
-			const checkBanned = filters.includes('banned');
-			uids = uids.filter((uid, index) => (checkBanned ? isMembersOfBanned[index] : !isMembersOfBanned[index]));
+			uids = await filterByBanned(uids, filters);
 		}
 
 		fields.push('uid');
 		let userData = await User.getUsersFields(uids, fields);
 
-		filters.forEach((filter) => {
-			if (filterFnMap[filter]) {
-				userData = userData.filter(filterFnMap[filter]);
-			}
-		});
+		userData = applyFilterFunctions(userData, filters);
 
 		if (data.sortBy) {
 			sortUsers(userData, data.sortBy, data.sortDirection);
@@ -180,6 +163,46 @@ module.exports = function (User) {
 
 		return userData.map(user => user.uid);
 	}
+
+
+	function filterValidUids(uids) {
+		return uids.filter(uid => parseInt(uid, 10) || activitypub.helpers.isUri(uid));
+	}
+
+	function normalizeFilters(filters) {
+		if (!filters) return [];
+		return Array.isArray(filters) ? filters : [filters];
+	}
+
+	function collectFields(filters, sortBy) {
+		const fields = [];
+		if (sortBy) fields.push(sortBy);
+
+		filters.forEach((filter) => {
+			if (filterFieldMap[filter]) {
+				fields.push(...filterFieldMap[filter]);
+			}
+		});
+		return fields;
+	}
+
+	async function filterByGroup(uids, groupName) {
+		const isMembers = await groups.isMembers(uids, groupName);
+		return uids.filter((_, index) => isMembers[index]);
+	}
+
+	async function filterByBanned(uids, filters) {
+		const isMembersOfBanned = await groups.isMembers(uids, groups.BANNED_USERS);
+		const checkBanned = filters.includes('banned');
+		return uids.filter((_, index) => (checkBanned ? isMembersOfBanned[index] : !isMembersOfBanned[index]));
+	}
+
+	function applyFilterFunctions(userData, filters) {
+		return filters.reduce((data, filter) => {
+			return filterFnMap[filter] ? data.filter(filterFnMap[filter]) : data;
+		}, userData);
+	}
+
 
 	function sortUsers(userData, sortBy, sortDirection) {
 		if (!userData || !userData.length) {
