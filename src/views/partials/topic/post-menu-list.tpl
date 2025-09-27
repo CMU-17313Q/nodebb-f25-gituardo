@@ -48,11 +48,21 @@
 </li>
 {{{ end }}}
 
+{{{ if posts.display_endorse_tools }}}
 <li>
-	<a class="dropdown-item rounded-1 d-flex align-items-center gap-2" component="post/endorse_tools" role="menuitem" href="#">
+	<a class="dropdown-item rounded-1 d-flex align-items-center gap-2" component="post/endorse" role="menuitem" href="#">
 		<span class="menu-icon"><i class="fa fa-fw text-secondary fa-user-pen"></i></span> [[topic:endorse]]
 	</a>
 </li>
+{{{ end }}}
+
+{{{ if posts.display_unendorse_tools }}}
+<li>
+	<a class="dropdown-item rounded-1 d-flex align-items-center gap-2" component="post/unendorse" role="menuitem" href="#">
+		<span class="menu-icon"><i class="fa fa-fw text-secondary fa-user-pen"></i></span> [[topic:unendorse]]
+	</a>
+</li>
+{{{ end }}}
 
 {{{ if posts.ip }}}
 <li>

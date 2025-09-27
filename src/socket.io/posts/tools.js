@@ -19,7 +19,7 @@ module.exports = function (SocketPosts) {
 		}
 		const cid = await posts.getCidByPid(data.pid);
 		const results = await utils.promiseParallel({
-			posts: posts.getPostFields(data.pid, ['deleted', 'bookmarks', 'uid', 'ip', 'flagId', 'url']),
+			posts: posts.getPostFields(data.pid, ['deleted', 'bookmarks', 'uid', 'ip', 'flagId', 'url', 'endorsed']),
 			isAdmin: user.isAdministrator(socket.uid),
 			isGlobalMod: user.isGlobalModerator(socket.uid),
 			isModerator: user.isModerator(socket.uid, cid),
@@ -48,7 +48,10 @@ module.exports = function (SocketPosts) {
 		postData.display_move_tools = results.isAdmin || results.isModerator;
 		postData.display_change_owner_tools = results.isAdmin || results.isModerator;
 		postData.display_manage_editors_tools = results.isAdmin || results.isModerator || postData.selfPost;
+		
 		postData.display_endorse_tools = results.isAdmin || results.isModerator || postData.selfPost;
+		postData.display_unendorse_tools = results.isAdmin || results.isModerator || postData.selfPost;
+		
 		postData.display_ip_ban = (results.isAdmin || results.isGlobalMod) && !postData.selfPost;
 		postData.display_history = results.history && results.canViewHistory;
 		postData.display_original_url = !utils.isNumber(data.pid);
