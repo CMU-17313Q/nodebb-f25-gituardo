@@ -48,6 +48,12 @@
 </li>
 {{{ end }}}
 
+<li>
+	<a class="dropdown-item rounded-1 d-flex align-items-center gap-2" component="post/endorse_tools" role="menuitem" href="#">
+		<span class="menu-icon"><i class="fa fa-fw text-secondary fa-user-pen"></i></span> [[topic:endorse]]
+	</a>
+</li>
+
 {{{ if posts.ip }}}
 <li>
 	<a class="dropdown-item rounded-1 d-flex align-items-center gap-2" component="post/copy-ip" role="menuitem" href="#" data-clipboard-text="{posts.ip}">
