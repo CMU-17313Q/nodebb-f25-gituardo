@@ -91,6 +91,19 @@ define('forum/topic/postTools', [
 			.removeAttr('data-loaded').html('');
 	};
 
+	PostTools.toggleEndorse = function (pid, isEndorsed) {
+		const postEl = components.get('post', 'pid', pid);
+		if (!postEl.length) {
+			return;
+		}
+
+		postEl.toggleClass('endorsed', isEndorsed);
+
+		// Invalidate the tools dropdown so it's re-rendered with the correct buttons
+		PostTools.removeMenu(postEl);
+		hooks.fire('action:post.toggleEndorse', { pid: pid, isEndorsed: isEndorsed });
+	};
+
 	PostTools.updatePostCount = function (postCount) {
 		const postCountEl = components.get('topic/post-count');
 		postCountEl.attr('title', postCount)
@@ -282,7 +295,7 @@ define('forum/topic/postTools', [
 				if (err) {
 					return alerts.error(err);
 				}
-				hooks.fire('action:post.endorsed', { pid: pid });
+				PostTools.toggleEndorse(pid, true);
 			});
 		});
 		
@@ -292,7 +305,7 @@ define('forum/topic/postTools', [
 				if (err) {
 					return alerts.error(err);
 				}
-				hooks.fire('action:post.unendorsed', { pid: pid });
+				PostTools.toggleEndorse(pid, false);
 			});
 		});
 
