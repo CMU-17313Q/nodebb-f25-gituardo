@@ -276,6 +276,26 @@ define('forum/topic/postTools', [
 			});
 		});
 
+		postContainer.on('click', '[component="post/endorse"]', function () {
+			const pid = getData($(this), 'data-pid');
+			socket.emit('posts.endorse', { pid: pid }, function (err) {
+				if (err) {
+					return alerts.error(err);
+				}
+				hooks.fire('action:post.endorsed', { pid: pid });
+			});
+		});
+		
+		postContainer.on('click', '[component="post/unendorse"]', function () {
+			const pid = getData($(this), 'data-pid');
+			socket.emit('posts.unendorse', { pid: pid }, function (err) {
+				if (err) {
+					return alerts.error(err);
+				}
+				hooks.fire('action:post.unendorsed', { pid: pid });
+			});
+		});
+
 		postContainer.on('click', '[component="post/ban-ip"]', function () {
 			const ip = $(this).attr('data-ip');
 			socket.emit('blacklist.addRule', ip, function (err) {
