@@ -21,7 +21,7 @@ module.exports = function (SocketPosts) {
 		}
 		const cid = await posts.getCidByPid(data.pid);
 		const results = await utils.promiseParallel({
-			posts: posts.getPostFields(data.pid, ['deleted', 'bookmarks', 'uid', 'ip', 'flagId', 'url', 'endorsed']),
+			posts: posts.getPostFields(data.pid, ['deleted', 'bookmarks', 'uid', 'ip', 'flagId', 'url', 'endorsed', 'tid', 'endorserUsername']),
 			isAdmin: user.isAdministrator(socket.uid),
 			isGlobalMod: user.isGlobalModerator(socket.uid),
 			isModerator: user.isModerator(socket.uid, cid),
@@ -51,12 +51,11 @@ module.exports = function (SocketPosts) {
 		postData.display_change_owner_tools = results.isAdmin || results.isModerator;
 		postData.display_manage_editors_tools = results.isAdmin || results.isModerator || postData.selfPost;
 		postData.endorsed = parseInt(postData.endorsed, 10) === 1;
-		postData.display_endorse_tools = (results.isAdmin || results.isModerator || postData.selfPost) && (postData.endorsed === false);
-		postData.display_unendorse_tools = (results.isAdmin || results.isModerator || postData.selfPost) && (postData.endorsed === true);
-		
-		
-		
-		console.log('tools, post: ', postData.pid, 'endorsed:', postData.endorsed);
+		postData.endorserUsername = postData.endorsed ? postData.endorserUsername : 'OP';
+		postData.display_endorse_tools = (results.isAdmin || results.isModerator || 
+			postData.selfPost) && !postData.endorsed;
+		postData.display_unendorse_tools = (results.isAdmin || results.isModerator || 
+			postData.selfPost) && postData.endorsed;
 
 		postData.display_ip_ban = (results.isAdmin || results.isGlobalMod) && !postData.selfPost;
 		postData.display_history = results.history && results.canViewHistory;
@@ -82,6 +81,7 @@ module.exports = function (SocketPosts) {
 
 		return results;
 	};
+
 
 	SocketPosts.changeOwner = async function (socket, data) {
 		if (!data || !Array.isArray(data.pids) || !data.toUid) {
@@ -129,20 +129,20 @@ module.exports = function (SocketPosts) {
 		if (!data || !data.pid) {
 			throw new Error('[[error:invalid-data]]');
 		}
-		await posts.setEndorsed(data.pid, true);
-		const endorsed = await db.getObjectField('post:' + data.pid, 'endorsed');
-		console.log(`Endorsed value for post ${data.pid}:`, endorsed);
-		return { success: true };
+		const endorser = await user.getUserFields(socket.uid, ['uid', 'username']);
+		await posts.setEndorsed(data.pid, true, endorser);
+ 
+	
+		return { success: true, endorserUsername: endorser.username };
 	};
 
 	SocketPosts.unendorse = async function (socket, data) {
 		if (!data || !data.pid) {
 			throw new Error('[[error:invalid-data]]');
 		}
-		await posts.setEndorsed(data.pid, false);
-		const endorsed = await db.getObjectField('post:' + data.pid, 'endorsed');
-		console.log(`Endorsed value for post ${data.pid}:`, endorsed);
-		return { success: true };
+		const endorser = await user.getUserFields(socket.uid, ['uid', 'username']);
+		await posts.setEndorsed(data.pid, false, endorser);
+		return { success: true, endorserUsername: endorser.username };
 	};
 
 	async function checkEditorPrivilege(uid, pid) {

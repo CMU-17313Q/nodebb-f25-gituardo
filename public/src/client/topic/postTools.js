@@ -91,25 +91,22 @@ define('forum/topic/postTools', [
 			.removeAttr('data-loaded').html('');
 	};
 
-	PostTools.toggleEndorse = function (pid, isEndorsed) {
+	PostTools.toggleEndorse = function (pid, isEndorsed, endorserUsername) {
 		const postEl = components.get('post', 'pid', pid);
 		if (!postEl.length) {
 			return;
 		}
 
 		postEl.toggleClass('endorsed', isEndorsed);
-
+		
 		// Toggle the badge to the left of the post index
 		const badgeSelector = '.post-index-endorsed-badge';
 		if (isEndorsed) {
-			//if (!postEl.find(badgeSelector).length) {
-			//const postIndex = postEl.find('.post-index.text-muted.d-none.d-md-inline');
-			//$('<span class="badge bg-success post-index-endorsed-badge me-2" title=
-			// "Endorsed by staff">Endorsed by OP</span>')
-			//.insertBefore(postIndex);
-			//}
-			if (!isEndorsed) {
-				console.log('a');
+			if (!postEl.find(badgeSelector).length) {
+				const postIndex = postEl.find('.post-index').first();
+				$('<span class="badge bg-success post-index-endorsed-badge me-2" title="Endorsed by staff">Endorsed by ' +
+					endorserUsername + '</span>')
+					.insertBefore(postIndex);
 			}
 		} else {
 			postEl.find(badgeSelector).remove();
@@ -307,21 +304,21 @@ define('forum/topic/postTools', [
 
 		postContainer.on('click', '[component="post/endorse"]', function () {
 			const pid = getData($(this), 'data-pid');
-			socket.emit('posts.endorse', { pid: pid }, function (err) {
+			socket.emit('posts.endorse', { pid: pid }, function (err, result) {
 				if (err) {
 					return alerts.error(err);
 				}
-				PostTools.toggleEndorse(pid, true);
+				PostTools.toggleEndorse(pid, true, result && result.endorserUsername ? result.endorserUsername : 'OP');
 			});
 		});
 		
 		postContainer.on('click', '[component="post/unendorse"]', function () {
 			const pid = getData($(this), 'data-pid');
-			socket.emit('posts.unendorse', { pid: pid }, function (err) {
+			socket.emit('posts.unendorse', { pid: pid }, function (err, result) {
 				if (err) {
 					return alerts.error(err);
 				}
-				PostTools.toggleEndorse(pid, false);
+				PostTools.toggleEndorse(pid, false, result && result.endorserUsername ? result.endorserUsername : 'OP');
 			});
 		});
 
