@@ -74,6 +74,17 @@ module.exports = function (Topics) {
 			uid: uid,
 			posts: await Topics.addPostData(postData, uid),
 		});
+		
+		result.posts.sort((a, b) => {
+			if (a.pid == topicData.mainPid) return -1;
+			if (b.pid == topicData.mainPid) return 1;
+			// Endorsed posts at the top, then by index
+			if (a.endorsed === b.endorsed) {
+				return a.index - b.index;
+			} 
+			return (b.endorsed ? 1 : 0) - (a.endorsed ? 1 : 0);
+		});
+		
 		return result.posts;
 	};
 
