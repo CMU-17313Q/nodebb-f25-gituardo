@@ -200,8 +200,6 @@ describe('API', async () => {
 			await user.create({ username: 'deleteme', password: '123456' }); // for testing of DELETE /users (uids 5, 6) and DELETE /user/:uid/account (uid 7)
 		}
 		await groups.join('administrators', adminUid);
-		//ensure that admin can create sub-categpries
-		await privsCategories.give(['subcategories:create'], testCategory.cid, 1);
 
 
 		// Create api token for testing read/updating/deletion
@@ -250,6 +248,9 @@ describe('API', async () => {
 
 		// Create a category
 		const testCategory = await categories.create({ name: 'test' });
+
+		//ensure that admin can create sub-categpries
+		await privsCategories.give(['subcategories:create'], testCategory.cid, 1);
 
 		// Post a new topic
 		await topics.post({
