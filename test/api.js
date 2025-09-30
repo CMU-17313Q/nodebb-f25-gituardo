@@ -26,7 +26,7 @@ const messaging = require('../src/messaging');
 const activitypub = require('../src/activitypub');
 const utils = require('../src/utils');
 const api = require('../src/api');
-const privileges = require('../src/privileges/categories');
+const privsCategories = require('../src/privileges/categories');
 
 describe('API', async () => {
 	let readApi = false;
@@ -201,7 +201,7 @@ describe('API', async () => {
 		}
 		await groups.join('administrators', adminUid);
 		//ensure that admin can create sub-categpries
-		await privileges.categories.give(['subcategories:create'], 1, adminUid);
+		await privsCategories.give(['subcategories:create'], testCategory.cid, 1);
 
 
 		// Create api token for testing read/updating/deletion
