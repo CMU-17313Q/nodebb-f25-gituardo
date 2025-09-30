@@ -9,8 +9,10 @@ const events = require('../../events');
 const privileges = require('../../privileges');
 const plugins = require('../../plugins');
 const social = require('../../social');
+const topics = require('../../topics');
 const user = require('../../user');
 const utils = require('../../utils');
+// const { post } = require('jquery');
 
 module.exports = function (SocketPosts) {
 	SocketPosts.loadPostTools = async function (socket, data) {
@@ -19,7 +21,7 @@ module.exports = function (SocketPosts) {
 		}
 		const cid = await posts.getCidByPid(data.pid);
 		const results = await utils.promiseParallel({
-			posts: posts.getPostFields(data.pid, ['deleted', 'bookmarks', 'uid', 'ip', 'flagId', 'url']),
+			posts: posts.getPostFields(data.pid, ['deleted', 'bookmarks', 'uid', 'tid', 'ip', 'flagId', 'url', 'endorsed', 'endorserUsername']),
 			isAdmin: user.isAdministrator(socket.uid),
 			isGlobalMod: user.isGlobalModerator(socket.uid),
 			isModerator: user.isModerator(socket.uid, cid),
@@ -34,7 +36,7 @@ module.exports = function (SocketPosts) {
 			history: posts.diffs.exists(data.pid),
 			canViewInfo: privileges.global.can('view:users:info', socket.uid),
 		});
-
+		
 		const postData = results.posts;
 		postData.pid = data.pid;
 		postData.absolute_url = `${nconf.get('url')}/post/${encodeURIComponent(data.pid)}`;
@@ -48,6 +50,19 @@ module.exports = function (SocketPosts) {
 		postData.display_move_tools = results.isAdmin || results.isModerator;
 		postData.display_change_owner_tools = results.isAdmin || results.isModerator;
 		postData.display_manage_editors_tools = results.isAdmin || results.isModerator || postData.selfPost;
+		
+		const mainPid = await topics.getTopicField(postData.tid, 'mainPid');
+		const mainUid = await posts.getPostField(mainPid, 'uid');
+		const isMainOwner = mainUid == socket.uid;
+		const isMainPost = mainPid == data.pid;
+
+		postData.endorsed = parseInt(postData.endorsed, 10) === 1;
+		postData.endorserUsername = postData.endorsed ? postData.endorserUsername : 'OP';
+		postData.display_endorse_tools = (results.isAdmin || results.isModerator ||
+			isMainOwner) && !postData.endorsed && !isMainPost && !postData.selfPost;
+		postData.display_unendorse_tools = (results.isAdmin || results.isModerator ||
+			isMainOwner) && postData.endorsed && !isMainPost && !postData.selfPost;
+
 		postData.display_ip_ban = (results.isAdmin || results.isGlobalMod) && !postData.selfPost;
 		postData.display_history = results.history && results.canViewHistory;
 		postData.display_original_url = !utils.isNumber(data.pid);
@@ -72,6 +87,7 @@ module.exports = function (SocketPosts) {
 
 		return results;
 	};
+
 
 	SocketPosts.changeOwner = async function (socket, data) {
 		if (!data || !Array.isArray(data.pids) || !data.toUid) {
@@ -113,6 +129,26 @@ module.exports = function (SocketPosts) {
 		await checkEditorPrivilege(socket.uid, data.pid);
 		await db.delete(`pid:${data.pid}:editors`);
 		await db.setAdd(`pid:${data.pid}:editors`, data.uids);
+	};
+
+	SocketPosts.endorse = async function (socket, data) {
+		if (!data || !data.pid) {
+			throw new Error('[[error:invalid-data]]');
+		}
+		const endorser = await user.getUserFields(socket.uid, ['uid', 'username']);
+		await posts.setEndorsed(data.pid, true, endorser);
+ 
+	
+		return { success: true, endorserUsername: endorser.username };
+	};
+
+	SocketPosts.unendorse = async function (socket, data) {
+		if (!data || !data.pid) {
+			throw new Error('[[error:invalid-data]]');
+		}
+		const endorser = await user.getUserFields(socket.uid, ['uid', 'username']);
+		await posts.setEndorsed(data.pid, false, endorser);
+		return { success: true, endorserUsername: endorser.username };
 	};
 
 	async function checkEditorPrivilege(uid, pid) {

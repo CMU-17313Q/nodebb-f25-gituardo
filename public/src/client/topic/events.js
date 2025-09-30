@@ -37,6 +37,8 @@ define('forum/topic/events', [
 		'event:post_deleted': togglePostDeleteState,
 		'event:post_restored': togglePostDeleteState,
 
+		'event:post_endorsed': onPostEndorsed,
+
 		'posts.bookmark': togglePostBookmark,
 		'posts.unbookmark': togglePostBookmark,
 
@@ -226,6 +228,10 @@ define('forum/topic/events', [
 				}
 			});
 		}
+	}
+
+	function onPostEndorsed(data) {
+		postTools.toggleEndorse(data.pid, data.endorsed);
 	}
 
 	function togglePostBookmark(data) {

@@ -28,6 +28,8 @@
     "move": "Move",
     "change-owner": "Change Owner",
     "manage-editors": "Manage Editors",
+    "endorse": "Endorse",
+    "endorsed-by-op": "Endorsed",
     "fork": "Fork",
     "link": "Link",
     "share": "Share",
