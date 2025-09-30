@@ -26,6 +26,16 @@ PostObject:
       description: A user identifier
     timestamp:
       type: number
+    endorsed:
+      type: number
+    endorserUid:
+      type: number
+      nullable: true
+    endorserUsername:
+      oneOf:
+        - type: number
+        - type: string
+      nullable: true
     deleted:
       type: boolean
     upvotes:
@@ -172,6 +182,16 @@ PostDataObject:
           type: string
         timestamp:
           type: number
+        endorsed:
+          type: number
+        endorserUid:
+          type: number
+          nullable: true
+        endorserUsername:
+          oneOf:
+            - type: number
+            - type: string
+          nullable: true
         votes:
           type: number
         deleted:
