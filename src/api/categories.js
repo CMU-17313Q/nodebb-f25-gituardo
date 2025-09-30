@@ -62,7 +62,10 @@ categoriesAPI.create = async function (caller, data) {
 			const allowed = await privileges.categories.can('subcategories:create', parentCid, caller.uid);
 			//Give an error to the user if they can't use this function
 			if (!allowed) {
-				throw new Error('[[error:no-privileges]]');
+				//throw new Error('[[error:no-privileges]]');
+				const err = new Error('You do not have permission to create sub-categories.');
+				err.staus = 403;
+				throw err;
 			}
 		}
 	}
