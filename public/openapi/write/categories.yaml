@@ -91,10 +91,10 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/Error.yaml#/Error
+            $ref: ../../components/responses/403.yaml#/403
     '500':
       description: Internal Server Error
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/Error.yaml#/Error
+            $ref: ../../components/responses/500.yaml#/500
