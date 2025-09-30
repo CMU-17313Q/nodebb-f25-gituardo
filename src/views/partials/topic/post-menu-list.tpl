@@ -48,6 +48,7 @@
 </li>
 {{{ end }}}
 
+
 {{{ if posts.ip }}}
 <li>
 	<a class="dropdown-item rounded-1 d-flex align-items-center gap-2" component="post/copy-ip" role="menuitem" href="#" data-clipboard-text="{posts.ip}">
@@ -90,6 +91,22 @@
 			</span>
 			<span class="bookmark-text">[[topic:bookmark]]</span>
 			<span component="post/bookmark-count" class="bookmarkCount badge bg-secondary" data-bookmarks="{posts.bookmarks}">{posts.bookmarks}</span>&nbsp;
+		</a>
+	</li>
+	{{{ end }}}
+
+	{{{ if posts.display_endorse_tools }}}
+	<li>
+		<a class="dropdown-item rounded-1 d-flex align-items-center gap-2" component="post/endorse" role="menuitem" href="#">
+			<span class="menu-icon"><i class="fa fa-fw text-secondary fa-star"></i></span> [[topic:endorse]]
+		</a>
+	</li>
+	{{{ end }}}
+
+	{{{ if posts.display_unendorse_tools }}}
+	<li>
+		<a class="dropdown-item rounded-1 d-flex align-items-center gap-2" component="post/unendorse" role="menuitem" href="#">
+			<span class="menu-icon"><i class="fa fa-fw text-secondary fa-star-o"></i></span> [[topic:unendorse]]
 		</a>
 	</li>
 	{{{ end }}}
@@ -142,6 +159,8 @@
 {{{ end }}}
 {{{ end }}}
 
+
+
 {{{ if posts.display_moderator_tools }}}
 {{{ if posts.flags.exists }}}
 <li>
@@ -154,3 +173,4 @@
 {{{ end }}}
 {{{ end }}}
 {{{ end }}}
+

@@ -105,3 +105,12 @@ Posts.modifyPostByPrivilege = function (post, privileges) {
 };
 
 require('../promisify')(Posts);
+
+async function setEndorsed(pid, endorsed, endorser) {
+	await db.setObjectField('post:' + pid, 'endorsed', endorsed ? 1 : 0);
+	if (endorsed && endorser) {
+		await db.setObjectField('post:' + pid, 'endorserUid', endorser.uid);
+		await db.setObjectField('post:' + pid, 'endorserUsername', endorser.username);
+	}
+}
+module.exports.setEndorsed = setEndorsed;
