@@ -26,6 +26,7 @@ const messaging = require('../src/messaging');
 const activitypub = require('../src/activitypub');
 const utils = require('../src/utils');
 const api = require('../src/api');
+const privileges = require('../privileges');
 
 describe('API', async () => {
 	let readApi = false;
@@ -199,6 +200,9 @@ describe('API', async () => {
 			await user.create({ username: 'deleteme', password: '123456' }); // for testing of DELETE /users (uids 5, 6) and DELETE /user/:uid/account (uid 7)
 		}
 		await groups.join('administrators', adminUid);
+		//ensure that admin can create sub-categpries
+		await privileges.categories.give(['subcategories:create'], 1, adminUid);
+
 
 		// Create api token for testing read/updating/deletion
 		const token = await api.utils.tokens.generate({ uid: adminUid });
