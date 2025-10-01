@@ -219,7 +219,7 @@ categoriesAPI.getPrivileges = async (caller, { cid }) => {
 	if (responsePayload.users) {
 		responsePayload.users = responsePayload.users.map(user => ({
 			...user,
-			name: user.name || (user.uid ? String(user.uid) : ''),
+			name: user.name || (user.uid ? String(user.uid) : 'anonymous'),
 			privileges: user.privileges || {},
 		}));
 	}
@@ -227,7 +227,7 @@ categoriesAPI.getPrivileges = async (caller, { cid }) => {
 	if (responsePayload.groups) {
 		responsePayload.groups = responsePayload.groups.map(group => ({
 			...group,
-			name: group.name || '',
+			name: group.name || 'group:registered-users',
 			privileges: group.privileges || {},
 		}));
 	}
