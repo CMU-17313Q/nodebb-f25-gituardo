@@ -56,36 +56,5 @@ get:
                           example: 1
                   selectedCategory:
                     $ref: ../../../../../components/schemas/CategoryObject.yaml#/CategoryObject
-                  privileges: 
-                    type: object
-                    properties:
-                      users:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                              example: topics:create
-                            label:
-                              type: string
-                              example: "[[admin/manage/privileges:create-topics]]"
-                            type:
-                              type: string
-                              example: posting
-                      groups:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                              example: groups:topics:create
-                            label:
-                              type: string
-                              example: "[[admin/manage/privileges:create-topics]]"
-                            type:
-                              type: string
-                              example: posting
               - $ref: ../../../../../components/schemas/CommonProps.yaml#/CommonProps
                   
