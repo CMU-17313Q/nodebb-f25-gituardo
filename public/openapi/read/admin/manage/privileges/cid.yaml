@@ -58,7 +58,7 @@ get:
                                 type: boolean
                                 description: Each privilege will have a key in this object
                           required:
-                            - nameEscaped
+                            - name
                       groups:
                         type: array
                         items:
@@ -81,7 +81,7 @@ get:
                             isSystem:
                               type: boolean
                           required:
-                            - nameEscaped
+                            - name
                       columnCountUserOther:
                         type: number
                       columnCountGroupOther:

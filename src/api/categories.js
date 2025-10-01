@@ -215,6 +215,24 @@ categoriesAPI.getPrivileges = async (caller, { cid }) => {
 		responsePayload = await privileges.categories.list(cid);
 	}
 
+	// Used ChatGPT to help write this part
+	if (responsePayload.users) {
+		responsePayload.users = responsePayload.users.map(user => ({
+			...user,
+			name: user.name || (user.uid ? String(user.uid) : ''),
+			privileges: user.privileges || {},
+		}));
+	}
+
+	if (responsePayload.groups) {
+		responsePayload.groups = responsePayload.groups.map(group => ({
+			...group,
+			name: group.name || '',
+			privileges: group.privileges || {},
+		}));
+	}
+
+
 	return responsePayload;
 };
 
