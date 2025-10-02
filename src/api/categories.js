@@ -219,15 +219,15 @@ categoriesAPI.getPrivileges = async (caller, { cid }) => {
 	if (responsePayload.users) {
 		responsePayload.users = responsePayload.users.map(user => ({
 			...user,
-			name: user.name || (user.uid ? String(user.uid) : 'anonymous'),
+			name: user.name ?? (user.username ?? (user.uid ? `user-${user.uid}` : 'anonymous')),
 			privileges: user.privileges || {},
 		}));
 	}
-
+	
 	if (responsePayload.groups) {
 		responsePayload.groups = responsePayload.groups.map(group => ({
 			...group,
-			name: group.name || 'group:registered-users',
+			name: group.name ?? (group.slug ? `group:${group.slug}` : 'group:unknown'),
 			privileges: group.privileges || {},
 		}));
 	}
