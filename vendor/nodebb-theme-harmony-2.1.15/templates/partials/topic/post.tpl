@@ -89,6 +89,13 @@
 			{posts.content}
 		</div>
 
+		<!-- Reaction bar -->
+		<div class="reaction-bar" data-pid="{{post.pid}}">
+    		<span class="reaction" data-type="like">👍 <span class="count">0</span></span>
+    		<span class="reaction" data-type="love">❤️ <span class="count">0</span></span>
+    		<span class="reaction" data-type="laugh">😂 <span class="count">0</span></span>
+		</div>
+
 		<div component="post/footer" class="post-footer border-bottom pb-2">
 			{{{ if posts.user.signature }}}
 			<div component="post/signature" data-uid="{posts.user.uid}" class="text-xs text-muted mt-2">{posts.user.signature}</div>
