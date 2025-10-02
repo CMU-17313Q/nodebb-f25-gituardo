@@ -24,6 +24,13 @@ module.exports = function (Posts) {
 			fields: fields,
 		});
 		result.posts.forEach(post => modifyPost(post, fields));
+		await Promise.all(result.posts.map(async (post) => {
+			if (!post || !post.pid) {
+				return;
+			}
+			post.reactions = await Posts.getReactions(post.pid);
+		}));
+	
 		return result.posts;
 	};
 
