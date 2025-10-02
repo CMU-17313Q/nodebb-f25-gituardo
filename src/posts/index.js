@@ -10,6 +10,7 @@ const plugins = require('../plugins');
 
 const Posts = module.exports;
 
+require('./reactions')(Posts);
 require('./data')(Posts);
 require('./create')(Posts);
 require('./delete')(Posts);

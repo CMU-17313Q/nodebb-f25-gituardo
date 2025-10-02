@@ -42,4 +42,24 @@ module.exports = function (app, middleware, controllers) {
 		middleware.canViewUsers,
 		middleware.checkAccountPermissions,
 	], helpers.tryRoute(controllers.accounts.edit.uploadPicture));
+	
+	router.post('/posts/:pid/reactions', [
+		...middlewares,
+		middleware.ensureLoggedIn,
+	], helpers.tryRoute(async (req, res) => {
+		const { type, action } = req.body;
+		const pid = req.params.pid;
+		const uid = req.user.uid;
+
+		if (action === 'add') {
+			return controllers.posts.addReaction(pid, uid, type);
+		} else if (action === 'remove') {
+			return controllers.posts.removeReaction(pid, uid);
+		}
+		throw new Error('[[error:invalid-reaction-action]]');
+	}));
+
+	router.get('/posts/:pid/reactions', [
+		...middlewares,
+	], helpers.tryRoute((req, res) => controllers.posts.getReactions(req.params.pid)));
 };

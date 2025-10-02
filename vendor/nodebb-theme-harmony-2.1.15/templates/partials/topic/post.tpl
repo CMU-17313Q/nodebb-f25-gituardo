@@ -90,11 +90,17 @@
 		</div>
 
 		<!-- Reaction bar -->
-		<div class="reaction-bar" data-pid="{{post.pid}}">
-    		<span class="reaction" data-type="like">👍 <span class="count">0</span></span>
-    		<span class="reaction" data-type="love">❤️ <span class="count">0</span></span>
-    		<span class="reaction" data-type="laugh">😂 <span class="count">0</span></span>
-		</div>
+		<div class="reaction-bar" data-pid="{{./pid}}">
+    <button class="reaction {{ if ./userReaction == 'like' }}reacted{{ end }}" data-type="like">
+        👍 <span class="count">{./reactions.like}</span>
+    </button>
+    <button class="reaction {{ if ./userReaction == 'love' }}reacted{{ end }}" data-type="love">
+        ❤️ <span class="count">{./reactions.love}</span>
+    </button>
+    <button class="reaction {{ if ./userReaction == 'laugh' }}reacted{{ end }}" data-type="laugh">
+        😂 <span class="count">{./reactions.laugh}</span>
+    </button>
+</div>
 
 		<div component="post/footer" class="post-footer border-bottom pb-2">
 			{{{ if posts.user.signature }}}
