@@ -57,3 +57,4 @@ get:
                   selectedCategory:
                     $ref: ../../../../../components/schemas/CategoryObject.yaml#/CategoryObject
               - $ref: ../../../../../components/schemas/CommonProps.yaml#/CommonProps
+                  

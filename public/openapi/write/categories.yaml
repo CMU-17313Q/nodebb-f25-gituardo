@@ -86,3 +86,29 @@ post:
                           type: string
                       unread-class:
                         type: string
+    '403':
+      description: Forbidden — user does not have permission to create sub-categories
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: error
+              error:
+                type: string
+                example: You do not have permission to create sub-categories.
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: error
+              error:
+                type: string
+                example: Internal Server Error

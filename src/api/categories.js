@@ -49,7 +49,26 @@ categoriesAPI.get = async function (caller, data) {
 };
 
 categoriesAPI.create = async function (caller, data) {
-	await hasAdminPrivilege(caller.uid);
+	//If there is no parentCid we assume its 0 (admin)
+	const parentCid = data.parentCid || 0;
+	// Check that only admins can create top-level categories
+	if (parseInt(parentCid, 10) === 0) {
+		await hasAdminPrivilege(caller.uid);
+	} else {
+		const isAdmin = await user.isAdministrator(caller.uid);
+		// Skip the check if the user is an admin
+		if (!isAdmin) {
+			// Check the new privilege for the Subcategories 
+			const allowed = await privileges.categories.can('subcategories:create', parentCid, caller.uid);
+			//Give an error to the user if they can't use this function
+			if (!allowed) {
+				//throw new Error('[[error:no-privileges]]');
+				const err = new Error('You do not have permission to create sub-categories.');
+				err.staus = 403;
+				throw err;
+			}
+		}
+	}
 
 	const response = await categories.create(data);
 	const categoryObjs = await categories.getCategories([response.cid]);
@@ -195,6 +214,24 @@ categoriesAPI.getPrivileges = async (caller, { cid }) => {
 	} else {
 		responsePayload = await privileges.categories.list(cid);
 	}
+
+	// Used ChatGPT to help write this part
+	if (responsePayload.users) {
+		responsePayload.users = responsePayload.users.map(user => ({
+			...user,
+			name: user.name ?? (user.username ?? (user.uid ? `user-${user.uid}` : 'anonymous')),
+			privileges: user.privileges || {},
+		}));
+	}
+	
+	if (responsePayload.groups) {
+		responsePayload.groups = responsePayload.groups.map(group => ({
+			...group,
+			name: group.name ?? (group.slug ? `group:${group.slug}` : 'group:unknown'),
+			privileges: group.privileges || {},
+		}));
+	}
+
 
 	return responsePayload;
 };

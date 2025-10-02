@@ -26,6 +26,7 @@ const messaging = require('../src/messaging');
 const activitypub = require('../src/activitypub');
 const utils = require('../src/utils');
 const api = require('../src/api');
+const privsCategories = require('../src/privileges/categories');
 
 describe('API', async () => {
 	let readApi = false;
@@ -200,6 +201,7 @@ describe('API', async () => {
 		}
 		await groups.join('administrators', adminUid);
 
+
 		// Create api token for testing read/updating/deletion
 		const token = await api.utils.tokens.generate({ uid: adminUid });
 		mocks.get['/admin/tokens/{token}'][0].example = token;
@@ -246,6 +248,9 @@ describe('API', async () => {
 
 		// Create a category
 		const testCategory = await categories.create({ name: 'test' });
+
+		//ensure that admin can create sub-categpries
+		await privsCategories.give(['subcategories:create'], testCategory.cid, 1);
 
 		// Post a new topic
 		await topics.post({

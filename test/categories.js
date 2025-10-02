@@ -20,22 +20,21 @@ describe('Categories', () => {
 		posterUid = await User.create({ username: 'poster' });
 		adminUid = await User.create({ username: 'admin' });
 		await groups.join('administrators', adminUid);
-	});
 
-
-	it('should create a new category', (done) => {
-		Categories.create({
+		categoryObj = await Categories.create({
 			name: 'Test Category & NodeBB',
 			description: 'Test category created by testing script',
 			icon: 'fa-check',
 			blockclass: 'category-blue',
 			order: '5',
-		}, (err, category) => {
-			assert.ifError(err);
-
-			categoryObj = category;
-			done();
 		});
+	});
+
+	it('should have created a new category', () => {
+		assert(categoryObj);
+		assert.strictEqual(categoryObj.name, 'Test Category & NodeBB');
+		assert.strictEqual(categoryObj.description, 'Test category created by testing script');
+		assert.strictEqual(categoryObj.disabled, 0);
 	});
 
 	it('should retrieve a newly created category by its ID', (done) => {
@@ -675,6 +674,7 @@ describe('Categories', () => {
 					'topics:reply': false,
 					'topics:read': false,
 					'topics:create': false,
+					'subcategories:create': false,
 					'topics:tag': false,
 					'topics:delete': false,
 					'topics:schedule': false,
@@ -727,7 +727,7 @@ describe('Categories', () => {
 					'groups:posts:history': true,
 					'groups:posts:upvote': true,
 					'groups:posts:downvote': true,
-					'groups:topics:delete': false,
+					'groups:topics:delete': true,
 					'groups:topics:create': true,
 					'groups:topics:reply': true,
 					'groups:topics:tag': true,
@@ -735,6 +735,7 @@ describe('Categories', () => {
 					'groups:posts:delete': true,
 					'groups:read': true,
 					'groups:topics:read': true,
+					'groups:subcategories:create': false,
 					'groups:purge': false,
 					'groups:posts:view_deleted': false,
 					'groups:moderate': false,

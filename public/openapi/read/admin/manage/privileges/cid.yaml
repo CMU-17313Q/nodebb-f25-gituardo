@@ -57,6 +57,8 @@ get:
                               additionalProperties:
                                 type: boolean
                                 description: Each privilege will have a key in this object
+                          required:
+                            - name
                       groups:
                         type: array
                         items:
@@ -78,6 +80,8 @@ get:
                               type: boolean
                             isSystem:
                               type: boolean
+                          required:
+                            - name
                       columnCountUserOther:
                         type: number
                       columnCountGroupOther:
