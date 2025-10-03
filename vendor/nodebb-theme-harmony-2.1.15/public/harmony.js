@@ -295,4 +295,13 @@ $(document).ready(function () {
 		mainNavEl.on('shown.bs.dropdown', toggleOverflow)
 			.on('hidden.bs.dropdown', toggleOverflow);
 	}
+	// Load Reactions on topic pages
+	require(['forum/reactions'], function (Reactions) {
+		$(window).on('action:ajaxify.end', function (ev, data) {
+			if (data.url && data.url.startsWith('topic/')) {
+				Reactions.init();
+			}
+		});
+	});
+
 });
