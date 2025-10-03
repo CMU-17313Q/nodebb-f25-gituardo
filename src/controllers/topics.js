@@ -88,6 +88,7 @@ topicsController.get = async function getTopic(req, res, next) {
 	}
 	const { start, stop } = calculateStartStop(currentPage, postIndex, settings);
 
+	posts.uid = req.uid;
 	await topics.getTopicWithPosts(topicData, set, req.uid, start, stop, reverse);
 
 	topics.modifyPostsByPrivilege(topicData, userPrivileges);

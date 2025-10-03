@@ -11,6 +11,8 @@ const intFields = [
 	'endorserUid', 'endorserUsername',
 ];
 
+const reactionTypes = ['like', 'love', 'laugh'];
+
 module.exports = function (Posts) {
 	Posts.getPostsFields = async function (pids, fields) {
 		if (!Array.isArray(pids) || !pids.length) {
@@ -18,19 +20,36 @@ module.exports = function (Posts) {
 		}
 		const keys = pids.map(pid => `post:${pid}`);
 		const postData = await db.getObjects(keys, fields);
-		const result = await plugins.hooks.fire('filter:post.getFields', {
-			pids: pids,
-			posts: postData,
-			fields: fields,
-		});
-		result.posts.forEach(post => modifyPost(post, fields));
-		await Promise.all(result.posts.map(async (post) => {
-			if (!post || !post.pid) {
-				return;
+
+		await Promise.all(postData.map(async (post) => {
+			if (!post) return;
+
+			// Counts
+			post.reactions = {};
+			await Promise.all(reactionTypes.map(async (type) => {
+				const key = `post:${post.pid}:reactions:${type}`;
+				post.reactions[type] = await db.setCount(key) || 0;
+			}));
+
+			// User reaction
+			if (Posts.uid && parseInt(Posts.uid, 10) > 0) {
+				const checks = await Promise.all(reactionTypes.map(async (type) => {
+					const reactedKey = `post:${post.pid}:reactions:${type}`;
+					const already = await db.isSetMember(reactedKey, Posts.uid);
+					return already ? type : null;
+				}));
+				post.userReaction = checks.find(Boolean) || null;
 			}
-			post.reactions = await Posts.getReactions(post.pid);
 		}));
-	
+
+		// Fire plugin hooks
+		const result = await plugins.hooks.fire('filter:post.getFields', {
+			pids,
+			posts: postData,
+			fields,
+		});
+		
+		result.posts.forEach(post => modifyPost(post, fields));
 		return result.posts;
 	};
 
