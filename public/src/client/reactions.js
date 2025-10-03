@@ -54,7 +54,7 @@ define('forum/reactions', [
 	function updateReactionCount($reaction, count) {
 		$reaction.find('.count').text(count);
 	}
-
+  
 	function handleReactionClick(e) {
 		e.preventDefault();
 		const $reaction = $(this);
@@ -62,29 +62,21 @@ define('forum/reactions', [
 		const pid = $bar.data('pid');
 		const type = $reaction.data('type');
 
-		// Optimistic UI update
-		let currentCount = parseInt($reaction.find('.count').text(), 10) || 0;
-		if ($reaction.hasClass('reacted')) {
-			currentCount -= 1;
-		} else {
-			currentCount += 1;
-		}
-		$reaction.toggleClass('reacted');
-		updateReactionCount($reaction, currentCount);
-
-		// Call backend API
-		const action = $reaction.hasClass('reacted') ? 'add' : 'remove';
-		api.post(`/posts/${pid}/reactions`, { type, action })
+		api.post('/reactions/toggle', { pid, type })
+			.then(result => {
+				updateReactionCount($reaction, result.count);
+				$reaction.toggleClass('reacted', result.reacted);
+			})
 			.catch(() => {
-				// Rollback on failure
-				$reaction.toggleClass('reacted');
-				updateReactionCount(
-					$reaction,
-					currentCount + ($reaction.hasClass('reacted') ? 1 : -1)
-				);
 				alerts.error('[[reactions:update-failed]]');
 			});
 	}
+
+	$(window).on('action:ajaxify.end', function (ev, data) {
+		if (data.url && data.url.startsWith('topic/')) {
+			Reactions.init();
+		}
+	});
 
 	return Reactions;
 });

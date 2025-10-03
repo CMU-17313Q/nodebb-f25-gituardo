@@ -11,6 +11,7 @@ const helpers = require('./helpers');
 
 const Controllers = module.exports;
 
+Controllers.reactions = require('./reactions');
 Controllers.ping = require('./ping');
 Controllers['well-known'] = require('./well-known');
 Controllers.activitypub = require('./activitypub');
