@@ -11,7 +11,7 @@ const intFields = [
 	'endorserUid', 'endorserUsername',
 ];
 
-const reactionTypes = ['like', 'love', 'laugh'];
+const reactionTypes = ['like', 'love', 'laugh', 'crying', 'angry'];
 
 module.exports = function (Posts) {
 	Posts.getPostsFields = async function (pids, fields) {
