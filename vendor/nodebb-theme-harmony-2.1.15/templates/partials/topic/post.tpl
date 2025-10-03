@@ -1,3 +1,34 @@
+<style>
+.reaction-bar {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+.reaction {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 9999px;
+  background: #f9f9f9;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+.reaction:hover {
+  background: #f0f0f0;
+  transform: translateY(-1px);
+}
+.reaction.reacted {
+  background: #e0f2ff;
+  border-color: #60a5fa;
+  color: #2563eb;
+  font-weight: 600;
+}
+</style>
+
 {{{ if (!./index && widgets.mainpost-header.length) }}}
 <div data-widget-area="mainpost-header">
 	{{{ each widgets.mainpost-header }}}
