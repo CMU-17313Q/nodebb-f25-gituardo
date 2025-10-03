@@ -62,7 +62,7 @@ define('forum/reactions', [
 		const pid = $bar.data('pid');
 		const type = $reaction.data('type');
 
-		api.post('/reactions/toggle', { pid, type })
+		api.post('/api/reactions/toggle', { pid, type })
 			.then(result => {
 				updateReactionCount($reaction, result.count);
 				$reaction.toggleClass('reacted', result.reacted);
