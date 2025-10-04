@@ -11,6 +11,7 @@ const intFields = [
 	'endorserUid', 'endorserUsername',
 ];
 
+// define all possible reaction types that users can apply to posts
 const reactionTypes = ['like', 'love', 'laugh', 'crying', 'angry'];
 
 module.exports = function (Posts) {
@@ -24,25 +25,30 @@ module.exports = function (Posts) {
 		await Promise.all(postData.map(async (post) => {
 			if (!post) return;
 
-			// Counts
+			// Reaction counts
 			post.reactions = {};
+			// retrieve how many users have given that reaction to the post
 			await Promise.all(reactionTypes.map(async (type) => {
 				const key = `post:${post.pid}:reactions:${type}`;
 				post.reactions[type] = await db.setCount(key) || 0;
 			}));
 
 			// User reaction
+			// make sure user is logged in
 			if (Posts.uid && parseInt(Posts.uid, 10) > 0) {
+				// check which reaction types this user has already given to the post
 				const checks = await Promise.all(reactionTypes.map(async (type) => {
 					const reactedKey = `post:${post.pid}:reactions:${type}`;
 					const already = await db.isSetMember(reactedKey, Posts.uid);
 					return already ? type : null;
 				}));
+				// the first non-null reaction is set as the user's current reaction
 				post.userReaction = checks.find(Boolean) || null;
 			}
 		}));
 
 		// Fire plugin hooks
+		// allow plugins to modify the post data before it’s returned
 		const result = await plugins.hooks.fire('filter:post.getFields', {
 			pids,
 			posts: postData,
