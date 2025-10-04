@@ -8,7 +8,7 @@ const intFields = [
 	'uid', 'pid', 'tid', 'deleted', 'timestamp',
 	'upvotes', 'downvotes', 'deleterUid', 'edited',
 	'replies', 'bookmarks', 'announces', 'endorsed',
-	'endorserUid', 'endorserUsername',
+	'endorserUid', 'endorserUsername', 'reactions', 'userReaction',
 ];
 
 // define all possible reaction types that users can apply to posts
