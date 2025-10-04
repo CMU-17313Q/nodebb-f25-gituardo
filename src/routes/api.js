@@ -44,9 +44,11 @@ module.exports = function (app, middleware, controllers) {
 		middleware.checkAccountPermissions,
 	], helpers.tryRoute(controllers.accounts.edit.uploadPicture));
 	
+	//route handles toggling reactions on posts 
 	router.post(
 		'/reactions/toggle',
 		[...middlewares, middleware.ensureLoggedIn],
+		//wrap the controller logic with error handling
 		helpers.tryRoute(reactionsController.toggle)
 	);
 
