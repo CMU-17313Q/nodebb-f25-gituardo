@@ -147,6 +147,10 @@ topicsController.get = async function getTopic(req, res, next) {
 		res.set('Link', `<${href}>; rel="alternate"; type="application/activity+json"`);
 	}
 
+	// Fetch 3 recommended topics (for now, just get recent topics)
+	const recommendedTopics = await topics.getTopicsFromSet('topics:recent', req.uid, 0, 2);
+	topicData.recommendedTopics = recommendedTopics.topics || [];
+
 	res.render('topic', topicData);
 };
 
