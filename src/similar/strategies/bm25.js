@@ -4,7 +4,7 @@
  * BM25 strategy using elasticlunr.
  * Indexes: title + body (first post). Returns top-N similar topics.
  */
-
+const { loadTopicDocsVisibleTo } = require('../topicStore');
 const elasticlunr = require('elasticlunr');
 
 // module-scoped index (rebuilt on startup for now)
@@ -16,12 +16,8 @@ let idx = null;
  * For now it returns an empty array.
  */
 async function loadTopicDocs() {
-	// Implementation in a later commit:
-	// - query DB for topics
-	// - body = first post content (shortened)
-	// - url = '/topic/' + tid (or whatever the project uses)
-	// - cid = category id (for same-category boost later)
-	return [];
+	// later we’ll pass `user` here for permissions
+	return await loadTopicDocsVisibleTo(null);
 }
 
 async function buildIndex() {
