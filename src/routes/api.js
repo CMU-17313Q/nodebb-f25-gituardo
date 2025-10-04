@@ -4,6 +4,7 @@ const express = require('express');
 
 const uploadsController = require('../controllers/uploads');
 const helpers = require('./helpers');
+const reactionsController = require('../controllers/reactions');
 
 module.exports = function (app, middleware, controllers) {
 	const middlewares = [middleware.autoLocale, middleware.authenticateRequest];
@@ -42,4 +43,13 @@ module.exports = function (app, middleware, controllers) {
 		middleware.canViewUsers,
 		middleware.checkAccountPermissions,
 	], helpers.tryRoute(controllers.accounts.edit.uploadPicture));
+	
+	//route handles toggling reactions on posts 
+	router.post(
+		'/reactions/toggle',
+		[...middlewares, middleware.ensureLoggedIn],
+		//wrap the controller logic with error handling
+		helpers.tryRoute(reactionsController.toggle)
+	);
+
 };

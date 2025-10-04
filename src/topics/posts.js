@@ -135,12 +135,16 @@ module.exports = function (Topics) {
 			userData,
 			editors,
 			replies,
+			reactionsData,
+			userReactions,
 		] = await Promise.all([
 			posts.hasBookmarked(pids, uid),
 			posts.getVoteStatusByPostIDs(pids, uid),
 			getPostUserData('uid', async uids => await posts.getUserInfoForPosts(uids, uid)),
 			getPostUserData('editor', async uids => await user.getUsersFields(uids, ['uid', 'username', 'userslug'])),
 			getPostReplies(postData, uid),
+			posts.getReactions(pids),        
+			posts.getUserReactions(pids, uid),
 			Topics.addParentPosts(postData, uid),
 		]);
 
@@ -155,6 +159,12 @@ module.exports = function (Topics) {
 				postObj.votes = postObj.votes || 0;
 				postObj.replies = replies[i];
 				postObj.selfPost = parseInt(uid, 10) > 0 && parseInt(uid, 10) === postObj.uid;
+
+				const postReactions = reactionsData[postObj.pid] || {};  
+				const userReaction = userReactions[postObj.pid] || null; 
+
+				postObj.reactions = postReactions;
+				postObj.userReaction = userReaction;
 
 				// Username override for guests, if enabled
 				if (meta.config.allowGuestHandles && postObj.uid === 0 && postObj.handle) {

@@ -104,6 +104,32 @@ Posts.modifyPostByPrivilege = function (post, privileges) {
 	}
 };
 
+Posts.getReactions = async function (pids) {
+	const reactions = {};
+	await Promise.all(pids.map(async (pid) => {
+		const reactionKeys = await db.getObjectKeys(`post:${pid}:reactions`);
+		if (!reactionKeys || !reactionKeys.length) {
+			reactions[pid] = {};
+			return;
+		}
+		const counts = await db.getObject(`post:${pid}:reactions`);
+		reactions[pid] = counts || {};
+	}));
+	return reactions;
+};
+
+Posts.getUserReactions = async function (pids, uid) {
+	const userReactions = {};
+	await Promise.all(pids.map(async (pid) => {
+		const type = await db.getObjectField(`post:${pid}:userReactions`, uid);
+		if (type) {
+			userReactions[pid] = type;
+		}
+	}));
+	return userReactions;
+};
+
+
 require('../promisify')(Posts);
 
 async function setEndorsed(pid, endorsed, endorser) {
@@ -114,3 +140,4 @@ async function setEndorsed(pid, endorsed, endorser) {
 	}
 }
 module.exports.setEndorsed = setEndorsed;
+
