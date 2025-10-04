@@ -88,6 +88,7 @@ topicsController.get = async function getTopic(req, res, next) {
 	}
 	const { start, stop } = calculateStartStop(currentPage, postIndex, settings);
 
+	//Store the current logged-in user ID on the 'posts' object
 	posts.uid = req.uid;
 	await topics.getTopicWithPosts(topicData, set, req.uid, start, stop, reverse);
 
