@@ -104,28 +104,40 @@ Posts.modifyPostByPrivilege = function (post, privileges) {
 	}
 };
 
+function withTimeout(promise, ms) {
+	return Promise.race([
+		promise,
+		new Promise(function (resolve) {
+			setTimeout(function () { resolve(null); }, ms);
+		}),
+	]);
+}
+
 Posts.getReactions = async function (pids) {
 	const reactions = {};
-
-	//Exit if there is no valid post IDs
 	if (!Array.isArray(pids) || !pids.length) {
 		return reactions;
 	}
 
-	await Promise.all(pids.map(async (pid) => {
+	await Promise.all(pids.map(async function (pid) {
 		try {
-			//Fetch the reaction keys
-			const reactionKeys = await db.getObjectKeys(`post:${pid}:reactions`).catch(() => []);
-			if (!reactionKeys || !reactionKeys.length) {
+			const reactionKeys = await withTimeout(
+				db.getObjectKeys('post:' + pid + ':reactions').catch(function () { return []; }),
+				2000
+			);
+
+			if (!Array.isArray(reactionKeys) || !reactionKeys.length) {
 				reactions[pid] = {};
 				return;
 			}
 
-			//Get the stored reaction counts
-			const counts = await db.getObject(`post:${pid}:reactions`).catch(() => ({}));
+			const counts = await withTimeout(
+				db.getObject('post:' + pid + ':reactions').catch(function () { return {}; }),
+				2000
+			);
+
 			reactions[pid] = counts || {};
-		} catch (err) {
-			// Prevent hangs in tests by ensuring every post resolves
+		} catch (e) {
 			reactions[pid] = {};
 		}
 	}));
@@ -135,20 +147,21 @@ Posts.getReactions = async function (pids) {
 
 Posts.getUserReactions = async function (pids, uid) {
 	const userReactions = {};
-
-	// Exit if missing data
 	if (!Array.isArray(pids) || !pids.length || !uid) {
 		return userReactions;
 	}
 
-	await Promise.all(pids.map(async (pid) => {
+	await Promise.all(pids.map(async function (pid) {
 		try {
-			const type = await db.getObjectField(`post:${pid}:userReactions`, uid).catch(() => null);
+			const type = await withTimeout(
+				db.getObjectField('post:' + pid + ':userReactions', uid).catch(function () { return null; }),
+				2000
+			);
+
 			if (type) {
 				userReactions[pid] = type;
 			}
-		} catch (err) {
-			// Ensure no blocking if DB mock fails
+		} catch (e) {
 			userReactions[pid] = null;
 		}
 	}));
