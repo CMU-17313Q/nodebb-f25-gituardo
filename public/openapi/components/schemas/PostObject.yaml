@@ -47,9 +47,14 @@ PostObject:
     reactions:
       type: object
       description: Emoji reaction counts per type (e.g., like, love, laugh)
+      additionalProperties:
+        type: number
     userReaction:
-      type: string
+      type: number
       description: The current user's selected reaction type (if any)
+      nullable: true
+      additionalProperties:
+            type: string
     timestampISO:
       type: string
       description: An ISO 8601 formatted date string (complementing `timestamp`)
@@ -84,7 +89,7 @@ PostObject:
             an avatar
         icon:bgColor:
           type: string
-          description: A six-character hexadecimal colour code assigned to the user. This
+          description: A six-character hexecimal colour code assigned to the user. This
             value is used in conjunction with
             `icon:text` for the user's auto-generated
             icon
@@ -210,8 +215,11 @@ PostDataObject:
           type: object
           description: Emoji reaction counts per type (e.g., like, love, laugh)
         userReaction:
-          type: string
+          type: number
           description: The current user's selected reaction type (if any)
+          nullable: true
+          additionalProperties:
+            type: string
         announces:
           type: number
         bookmarks:

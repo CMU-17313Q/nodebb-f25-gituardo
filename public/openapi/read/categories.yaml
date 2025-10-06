@@ -115,6 +115,9 @@ get:
                                                   example: "#f44336"
                                             index:
                                               type: number
+                                            reactions:
+                                              type: object
+                                              description: Emoji reaction counts per type (e.g., like, love, laugh)
                                             cid:
                                               type: number
                                               description: A category identifier
@@ -184,6 +187,9 @@ get:
                                         example: "#f44336"
                                   index:
                                     type: number
+                                  reactions:
+                                    type: object
+                                    description: Emoji reaction counts per type (e.g., like, love, laugh)
                                   cid:
                                     type: number
                                     description: A category identifier
