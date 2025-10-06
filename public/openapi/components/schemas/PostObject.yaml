@@ -89,7 +89,7 @@ PostObject:
             an avatar
         icon:bgColor:
           type: string
-          description: A six-character hexecimal colour code assigned to the user. This
+          description: A six-character hexadecimal colour code assigned to the user. This
             value is used in conjunction with
             `icon:text` for the user's auto-generated
             icon
