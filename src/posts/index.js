@@ -104,6 +104,8 @@ Posts.modifyPostByPrivilege = function (post, privileges) {
 	}
 };
 
+//runs a promise but stops and returns null if it takes too long
+//used the help of chatgpt
 function withTimeout(promise, ms) {
 	return Promise.race([
 		promise,
@@ -113,12 +115,14 @@ function withTimeout(promise, ms) {
 	]);
 }
 
+//gets reaction counts for a list of post id's
 Posts.getReactions = async function (pids) {
 	const reactions = {};
 	if (!Array.isArray(pids) || !pids.length) {
 		return reactions;
 	}
 
+	//for each post id we get its reactions
 	await Promise.all(pids.map(async function (pid) {
 		try {
 			const reactionKeys = await withTimeout(
@@ -131,6 +135,7 @@ Posts.getReactions = async function (pids) {
 				return;
 			}
 
+			//gets the actual counts for each reaction type 
 			const counts = await withTimeout(
 				db.getObject('post:' + pid + ':reactions').catch(function () { return {}; }),
 				2000
@@ -145,19 +150,22 @@ Posts.getReactions = async function (pids) {
 	return reactions;
 };
 
+//gets the specific reaction type a user gave to each post in pids
 Posts.getUserReactions = async function (pids, uid) {
 	const userReactions = {};
 	if (!Array.isArray(pids) || !pids.length || !uid) {
 		return userReactions;
 	}
 
+	//in each post id check what reaction this user has made
 	await Promise.all(pids.map(async function (pid) {
 		try {
 			const type = await withTimeout(
 				db.getObjectField('post:' + pid + ':userReactions', uid).catch(function () { return null; }),
 				2000
 			);
-
+			
+			//if the user reacted then we save the type
 			if (type) {
 				userReactions[pid] = type;
 			}
