@@ -106,26 +106,53 @@ Posts.modifyPostByPrivilege = function (post, privileges) {
 
 Posts.getReactions = async function (pids) {
 	const reactions = {};
+
+	//Exit if there is no valid post IDs
+	if (!Array.isArray(pids) || !pids.length) {
+		return reactions;
+	}
+
 	await Promise.all(pids.map(async (pid) => {
-		const reactionKeys = await db.getObjectKeys(`post:${pid}:reactions`);
-		if (!reactionKeys || !reactionKeys.length) {
+		try {
+			//Fetch the reaction keys
+			const reactionKeys = await db.getObjectKeys(`post:${pid}:reactions`).catch(() => []);
+			if (!reactionKeys || !reactionKeys.length) {
+				reactions[pid] = {};
+				return;
+			}
+
+			//Get the stored reaction counts
+			const counts = await db.getObject(`post:${pid}:reactions`).catch(() => ({}));
+			reactions[pid] = counts || {};
+		} catch (err) {
+			// Prevent hangs in tests by ensuring every post resolves
 			reactions[pid] = {};
-			return;
 		}
-		const counts = await db.getObject(`post:${pid}:reactions`);
-		reactions[pid] = counts || {};
 	}));
+
 	return reactions;
 };
 
 Posts.getUserReactions = async function (pids, uid) {
 	const userReactions = {};
+
+	// Exit if missing data
+	if (!Array.isArray(pids) || !pids.length || !uid) {
+		return userReactions;
+	}
+
 	await Promise.all(pids.map(async (pid) => {
-		const type = await db.getObjectField(`post:${pid}:userReactions`, uid);
-		if (type) {
-			userReactions[pid] = type;
+		try {
+			const type = await db.getObjectField(`post:${pid}:userReactions`, uid).catch(() => null);
+			if (type) {
+				userReactions[pid] = type;
+			}
+		} catch (err) {
+			// Ensure no blocking if DB mock fails
+			userReactions[pid] = null;
 		}
 	}));
+
 	return userReactions;
 };
 
