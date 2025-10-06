@@ -46,14 +46,14 @@ Reactions.toggle = async function (req, res, next) {
 		const count = await db.setCount(reactedKey);
 		
 		//the updated reaction info as a json response
-		res.json({
+		return res.json({
 			pid: parseInt(pid, 10),
 			type,
 			reacted: !already,
 			count,
 		});
 	} catch (err) {
-		next(err);
+		return next(err);
 	}
 };
 
