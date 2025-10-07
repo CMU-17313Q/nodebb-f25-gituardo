@@ -1,4 +1,5 @@
 'use strict';
+const recommend = require('../topics/recommend');
 
 const nconf = require('nconf');
 const qs = require('querystring');
@@ -147,10 +148,25 @@ topicsController.get = async function getTopic(req, res, next) {
 		res.set('Link', `<${href}>; rel="alternate"; type="application/activity+json"`);
 	}
 
-	// Fetch 3 recommended topics (for now, just get recent topics)
-	const recommendedTopics = await topics.getTopicsFromSet('topics:recent', req.uid, 0, 2);
-	topicData.recommendedTopics = recommendedTopics.topics || [];
-
+	try {
+		const categoryTopics = await topics.getTopicsFromSet(
+			`cid:${topicData.cid}:tids`,
+			req.uid,
+			0,
+			50 // Get 50 most recent posts as candidates to choose from
+		);
+		
+		const recommendedTopics = await recommend.getRecommendedTopics(
+			topicData,
+			categoryTopics.topics || [],
+			3
+		);
+		
+		topicData.recommendedTopics = recommendedTopics;
+	} catch (err) {
+		const fallbackTopics = await topics.getTopicsFromSet('topics:recent', req.uid, 0, 2);
+		topicData.recommendedTopics = fallbackTopics.topics || [];
+	}
 	res.render('topic', topicData);
 };
 
