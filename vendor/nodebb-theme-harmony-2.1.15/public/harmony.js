@@ -295,4 +295,15 @@ $(document).ready(function () {
 		mainNavEl.on('shown.bs.dropdown', toggleOverflow)
 			.on('hidden.bs.dropdown', toggleOverflow);
 	}
+	//import the 'forum/reactions' module
+	require(['forum/reactions'], function (Reactions) {
+		//triggered every time a new page is loaded.
+		$(window).on('action:ajaxify.end', function (ev, data) {
+			//Only initialize reactions on topic pages
+			if (data.url && data.url.startsWith('topic/')) {
+				Reactions.init();
+			}
+		});
+	});
+
 });

@@ -44,6 +44,17 @@ PostObject:
       type: number
     votes:
       type: number
+    reactions:
+      type: object
+      description: Emoji reaction counts per type (e.g., like, love, laugh)
+      additionalProperties:
+        type: number
+    userReaction:
+      type: number
+      description: The current user's selected reaction type (if any)
+      nullable: true
+      additionalProperties:
+            type: string
     timestampISO:
       type: string
       description: An ISO 8601 formatted date string (complementing `timestamp`)
@@ -200,6 +211,15 @@ PostDataObject:
           type: number
         downvotes:
           type: number
+        reactions:
+          type: object
+          description: Emoji reaction counts per type (e.g., like, love, laugh)
+        userReaction:
+          type: number
+          description: The current user's selected reaction type (if any)
+          nullable: true
+          additionalProperties:
+            type: string
         announces:
           type: number
         bookmarks:
