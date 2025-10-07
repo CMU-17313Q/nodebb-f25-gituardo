@@ -1,10 +1,46 @@
+<style>
+	.reaction-bar {
+  		display: flex;
+  		gap: 0.5rem;
+  		align-items: center;
+  		margin-top: 0.5rem;
+	}
+
+	.reaction {
+  		display: flex;
+  		align-items: center;
+  		gap: 0.25rem;
+  		padding: 0.3rem 0.6rem;
+  		border: 1px solid #ddd;
+  		border-radius: 9999px;
+  		background: #f9f9f9;
+  		cursor: pointer;
+  		font-size: 0.85rem;
+  		transition: all 0.2s ease;
+	}
+
+	.reaction:hover {
+  		background: #f0f0f0;
+  		transform: translateY(-1px);
+	}
+
+	.reaction.reacted {
+  		background: #e0f2ff;
+  		border-color: #60a5fa;
+  		color: #2563eb;
+  		font-weight: 600;
+	}
+
+</style>
+
 {{{ if (!./index && widgets.mainpost-header.length) }}}
-<div data-widget-area="mainpost-header">
-	{{{ each widgets.mainpost-header }}}
-	{widgets.mainpost-header.html}
-	{{{ end }}}
-</div>
+	<div data-widget-area="mainpost-header">
+		{{{ each widgets.mainpost-header }}}
+			{widgets.mainpost-header.html}
+		{{{ end }}}
+	</div>
 {{{ end }}}
+
 {{{ if (./parent && !hideParent) }}}
 <!-- IMPORT partials/topic/post-parent.tpl -->
 {{{ end }}}
@@ -87,6 +123,25 @@
 
 		<div class="content text-break" component="post/content" itemprop="text">
 			{posts.content}
+		</div>
+
+		<!-- Reaction bar -->
+		<div class="reaction-bar" data-pid="{{./pid}}">
+    		<button class="reaction {{ if ./userReaction == 'like' }}reacted{{ end }}" data-type="like">
+        		👍 <span class="count">{./reactions.like}</span>
+    		</button>
+    		<button class="reaction {{ if ./userReaction == 'love' }}reacted{{ end }}" data-type="love">
+        		❤️ <span class="count">{./reactions.love}</span>
+    		</button>
+    		<button class="reaction {{ if ./userReaction == 'laugh' }}reacted{{ end }}" data-type="laugh">
+        		😂 <span class="count">{./reactions.laugh}</span>
+    		</button>
+			<button class="reaction {{ if ./userReaction == 'crying' }}reacted{{ end }}" data-type="crying">
+				😭 <span class="count">{./reactions.crying}</span>
+			</button>
+			<button class="reaction {{ if ./userReaction == 'angry' }}reacted{{ end }}" data-type="angry">
+				😡 <span class="count">{./reactions.angry}</span>
+			</button>
 		</div>
 
 		<div component="post/footer" class="post-footer border-bottom pb-2">
