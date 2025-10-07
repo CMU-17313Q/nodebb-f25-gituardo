@@ -8,7 +8,6 @@ const helpers = require('./helpers');
 module.exports = function (app, middleware, controllers) {
 	const middlewares = [middleware.autoLocale, middleware.authenticateRequest];
 	const router = express.Router();
-	require('../similar/route')({ router, middleware });
 	app.use('/api', router);
 
 	router.get('/config', [...middlewares, middleware.applyCSRF], helpers.tryRoute(controllers.api.getConfig));
