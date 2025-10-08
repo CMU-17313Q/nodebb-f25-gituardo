@@ -26,6 +26,7 @@ Reactions.toggle = async function (req, res, next) {
 		
 		const reactedKey = `post:${pid}:reactions:${type}`;
 		const userKey = `uid:${uid}:reactions`;
+		const userReactionMap = `post:${pid}:userReactions`;
 		
 		const already = await db.isSetMember(reactedKey, uid);
 		
@@ -34,11 +35,13 @@ Reactions.toggle = async function (req, res, next) {
 			await Promise.all([
 				db.setRemove(reactedKey, uid),
 				db.sortedSetRemove(userKey, `${pid}:${type}`),
+				db.deleteObjectField(userReactionMap, uid),
 			]);
 		} else {
 			await Promise.all([
 				db.setAdd(reactedKey, uid),
 				db.sortedSetAdd(userKey, Date.now(), `${pid}:${type}`),
+				db.setObjectField(userReactionMap, uid, type),
 			]);
 		}
 		
