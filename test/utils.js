@@ -554,7 +554,7 @@ describe('Utility Methods', () => {
 
 		const { Translator } = shim;
 
-		it.skip('should translate in place', async () => {
+		it('should translate in place', async () => {
 			const translator = Translator.create('en-GB');
 			const el = $(`<div><span id="search" title="[[global:search]]"></span><span id="text">[[global:home]]</span></div>`);
 			await translator.translateInPlace(el.get(0));
