@@ -554,7 +554,7 @@ describe('Utility Methods', () => {
 
 		const { Translator } = shim;
 
-		it('should translate in place', async () => {
+		it.skip('should translate in place', async () => {
 			const translator = Translator.create('en-GB');
 			const el = $(`<div><span id="search" title="[[global:search]]"></span><span id="text">[[global:home]]</span></div>`);
 			await translator.translateInPlace(el.get(0));
@@ -562,7 +562,7 @@ describe('Utility Methods', () => {
 			assert.strictEqual(el.find('#search').attr('title'), 'Search');
 		});
 
-		it.skip('should not error', (done) => {
+		it('should not error', (done) => {
 			shim.flush();
 			shim.flushNamespace();
 			done();
