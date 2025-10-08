@@ -4,11 +4,11 @@
 const assert = require('assert');
 
 //import NodeBB and DB modules
-const db = require('./mocks/databasemock');
-const user = require('../src/user');
-const topics = require('../src/topics');
-const posts = require('../src/posts');
-const reactionsController = require('../src/controllers/reactions');
+const db = require('../mocks/databasemock');
+const user = require('../../src/user');
+const topics = require('../../src/topics');
+const posts = require('../../src/posts');
+const reactionsController = require('../../src/controllers/reactions');
 
 describe('post reactions', () => {
 	let uid;
@@ -25,8 +25,8 @@ describe('post reactions', () => {
 		});
 
 		// Create a test category
-		const categories = require('../src/categories');
-		const privileges = require('../src/privileges');
+		const categories = require('../../src/categories');
+		const privileges = require('../../src/privileges');
 
 		const { cid } = await categories.create({
 			name: 'Reactions Test Category',
