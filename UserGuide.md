@@ -118,7 +118,7 @@
 
 2.  **Screenshots**
 
-**Reactions Interface Overview:**
+**Reactions Interface:**
 ![Reactions bar with emoji options displayed under each post](media/image5.png)
 
 **User A reacted with a heart:**
