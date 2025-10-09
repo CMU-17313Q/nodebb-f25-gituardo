@@ -118,10 +118,12 @@
 
 2.  **Screenshots**
 
-![Reactions Interface](media/image5.png)
+**Reactions Interface Overview:**
+![Reactions bar with emoji options displayed under each post](media/image5.png)
 
-User A reacted with a heart
-![Reaction Example 1](media/image2.png)![Reaction Example 2](media/image3.png)
+![User A reacted with a heart](media/image2.png)
+
+![User B reacted with a heart](media/image3.png)
 
 **API Endpoint:**
 
@@ -170,6 +172,7 @@ User A reacted with a heart
 
 2.  **Screenshots**
 
+**Recommended posts section**
 ![Recommended Posts Section](media/image1.png)
 
 **How to Test:**
