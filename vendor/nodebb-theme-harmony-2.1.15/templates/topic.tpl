@@ -121,6 +121,8 @@
 				{{{ if config.usePagination }}}
 				<!-- IMPORT partials/paginator.tpl -->
 				{{{ end }}}
+
+				<!-- IMPORT partials/topic/recommended-topics.tpl -->
 			</div>
 			<div data-widget-area="sidebar" class="col-lg-3 col-sm-12 {{{ if !widgets.sidebar.length }}}hidden{{{ end }}}">
 			{{{each widgets.sidebar}}}
