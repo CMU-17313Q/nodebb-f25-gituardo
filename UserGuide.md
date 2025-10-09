@@ -121,8 +121,10 @@
 **Reactions Interface Overview:**
 ![Reactions bar with emoji options displayed under each post](media/image5.png)
 
+**User A reacted with a heart:**
 ![User A reacted with a heart](media/image2.png)
 
+**User B reacted with a heart:**
 ![User B reacted with a heart](media/image3.png)
 
 **API Endpoint:**
