@@ -40,6 +40,11 @@ start.start = async function () {
 			require('./plugins').startJobs();
 			require('./topics').scheduled.startJobs();
 			require('./activitypub').startJobs();
+			const recommend = require('./topics/recommend');
+			recommend.init().catch((err) => {
+				const winston = require('winston'); // or use console.warn
+				winston.warn('[Recommendations] Background model loading failed:', err.message);
+			});
 			await db.delete('locks');
 		}
 
