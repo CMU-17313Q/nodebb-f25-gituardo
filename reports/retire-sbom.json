@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:9f9f906b-3ae6-484d-b4aa-dffaa7106920" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:5fe60ddb-1bbc-45ab-97f4-ba34f3607171" version="1">
   <metadata>
-    <timestamp>2025-10-22T22:11:52.125Z</timestamp>
+    <timestamp>2025-10-22T22:41:24.719Z</timestamp>
     <tools>
         <tool>
             <vendor>RetireJS</vendor>
@@ -249,10 +249,10 @@
       <name>markdown-it</name>
       <version>14.1.0</version>
           <hashes>
-            <hash alg="MD5">93ffc7617f212adf260e8bcd9bad9027</hash>
-            <hash alg="SHA-1">0dcaeb727c709ae8a9a1b3816a30a401bd930773</hash>
-            <hash alg="SHA-256">433ba2a6946e8200c464d8845b98d826022a1836b4a713f01fa2830477c381e8</hash>
-            <hash alg="SHA-512">7cb8844cea6c90190c9965c445f2d65e2da52de98d81969d1538ae1a7aa0b2c61fc801a759fe4ae44e8a0284036680f160f6337b38d3b5048ff5f7c4fb715e5a</hash>
+            <hash alg="MD5">fa2353c693195cb6f3f97e89ef85a3fc</hash>
+            <hash alg="SHA-1">21c638414fd7c03378e8b27dcce6821fd8e02cfe</hash>
+            <hash alg="SHA-256">38c70a1e7ca91ab40e2d9e6e60129851a717ed1c7d4acbbdd41bf9503791cf68</hash>
+            <hash alg="SHA-512">2cccdd87d7f622b3fd48d4e32799fb5b70cd2322a7f5698c50fd73497351f61cb7f3c289d967adbd5813931c7f40799bb9537cba20646a266d6238e5f7da1e47</hash>
           </hashes>
       <licenses><expression>MIT</expression></licenses>
       <purl>pkg:npm/markdown-it@14.1.0</purl>
