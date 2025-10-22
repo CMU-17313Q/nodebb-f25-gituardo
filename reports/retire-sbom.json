@@ -1,0 +1,327 @@
+<?xml version="1.0"?>
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:9f9f906b-3ae6-484d-b4aa-dffaa7106920" version="1">
+  <metadata>
+    <timestamp>2025-10-22T22:11:52.125Z</timestamp>
+    <tools>
+        <tool>
+            <vendor>RetireJS</vendor>
+            <name>retire.js</name>
+            <version>5.3.0</version>
+        </tool>
+    </tools>
+  </metadata>
+  <components>
+    <component type="library">
+      <name>chart.js</name>
+      <version>4.4.9</version>
+          <hashes>
+            <hash alg="MD5">0f0792b6b64ff6487c3195c3f3e0d646</hash>
+            <hash alg="SHA-1">1b7b5b976f8d073b07c2acff7b643bf219878992</hash>
+            <hash alg="SHA-256">a5a780823ef178becc191c48403ff9eaec326695bf16e4eaa153947e73ccc23d</hash>
+            <hash alg="SHA-512">b712326e0903779e9bf8124261990a76d224a5bb49283dc09fa5910f9affdc95811593a0b0dfbf5a1371a6126549cd4fabd930e5d1a0e381cd94e9d3c1419e81</hash>
+          </hashes>
+      <licenses><expression>MIT</expression></licenses>
+      <purl>pkg:npm/chart.js@4.4.9</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>jquery-ui-autocomplete</name>
+      <version>1.14.1</version>
+          <hashes>
+            <hash alg="MD5">5e5d1a2dbe6dc472cbcd450aa3630975</hash>
+            <hash alg="SHA-1">18bfa0dfc4d77c09402660791cab342b5cc9437f</hash>
+            <hash alg="SHA-256">447e0993f918734ea05240ccc523bd3c6a897cdf86f48cfdcc18d2cc1f06b493</hash>
+            <hash alg="SHA-512">6f1c38c80fa222d49f6af5f4c1488ba0195f994503120318c8bcb56d1aa8ca2ffd8e7a31d08994e918d3804a5115f580067618e04809edb2ab960c52fe1747a7</hash>
+          </hashes>
+      <licenses><expression>MIT</expression></licenses>
+      <purl>pkg:npm/jquery-ui@1.14.1</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>jquery</name>
+      <version>3.7.1</version>
+          <hashes>
+            <hash alg="MD5">cbaf0ab49f3be50930ffce8216808abc</hash>
+            <hash alg="SHA-1">30f20304dbfa15946d70cbcdf5dacf8dc9832519</hash>
+            <hash alg="SHA-256">a5534d78026d2d7719b5e8101c557e6977966bafb9b12b784922e6f49b078518</hash>
+            <hash alg="SHA-512">a48b2de6f6119d407b20d89febe2bf7b3339d14c009cb7c4edf91331ca12fd4a45e94392c3448f7d9d85c9ec0d472623431cc5501cd3f54a1a684bbca64296e8</hash>
+          </hashes>
+      <licenses><expression>MIT</expression></licenses>
+      <purl>pkg:npm/jquery@3.7.1</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>bootstrap</name>
+      <version>5.3.6</version>
+          <hashes>
+            <hash alg="MD5">cbaf0ab49f3be50930ffce8216808abc</hash>
+            <hash alg="SHA-1">30f20304dbfa15946d70cbcdf5dacf8dc9832519</hash>
+            <hash alg="SHA-256">a5534d78026d2d7719b5e8101c557e6977966bafb9b12b784922e6f49b078518</hash>
+            <hash alg="SHA-512">a48b2de6f6119d407b20d89febe2bf7b3339d14c009cb7c4edf91331ca12fd4a45e94392c3448f7d9d85c9ec0d472623431cc5501cd3f54a1a684bbca64296e8</hash>
+          </hashes>
+      <licenses><expression>MIT</expression></licenses>
+      <purl>pkg:npm/bootstrap@5.3.6</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>clipboard</name>
+      <version>2.0.11</version>
+          <hashes>
+            <hash alg="MD5">d88bc26e8a8feb9f03c30382042b1304</hash>
+            <hash alg="SHA-1">0798633edaf6a1bda9beb9635c1e0887923d603f</hash>
+            <hash alg="SHA-256">ab67601456cf106b7fd50fab1c48b76f2099ee82de8d627202a14032ce461db7</hash>
+            <hash alg="SHA-512">cfabfbf61846b51bfbc8c0fd1aed4414a4f4405f9887a39462a7b60896c50ab2db7ae87f99c9c879b305bab561b30f2f8e189222a686dc93d8b7354562148bb8</hash>
+          </hashes>
+      <licenses></licenses>
+      <purl>pkg:npm/clipboard@2.0.11</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>express-useragent</name>
+      <version>1.0.14</version>
+          <hashes>
+            <hash alg="MD5">ea7ba1a9fb6fd81c20ea4bbae4352128</hash>
+            <hash alg="SHA-1">aa064ea4e2f67b3340f79234ad6fbfba3454543f</hash>
+            <hash alg="SHA-256">cd0591c8cce2c19e3eb6fdb96dd9832f7d2f542afb66b875d0d88df1ac61a04e</hash>
+            <hash alg="SHA-512">2842b48209ac1def7ac5ed925d01098c2c0197fd0966563568040e0927fdc184af214a417ee2424f4042382cd1aa28f2c17a524a62d4081a107886f08a05a60d</hash>
+          </hashes>
+      <licenses></licenses>
+      <purl>pkg:npm/express-useragent@1.0.14</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>good-listener</name>
+      <version>1.2.1</version>
+          <hashes>
+            <hash alg="MD5">662c2039d5b6b22f2f5f1f51eefd9931</hash>
+            <hash alg="SHA-1">f85e6217dff0126d7a86739f558a2d6b300c114a</hash>
+            <hash alg="SHA-256">c885ca10bd1ca324403db28c1246c666373f8189b0ff40826e1ce6af4aa7af9c</hash>
+            <hash alg="SHA-512">f477fb96121de556372198f1bd3e7c1e9c1615325e6a671ac4607062027a1b8bcc14536438b14f19b4c8d7b80b6daf5a11a99384e40fc10d62f9bbfc7161b73d</hash>
+          </hashes>
+      <licenses></licenses>
+      <purl>pkg:npm/good-listener@1.2.1</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>highlightjs-line-numbers.js</name>
+      <version>2.9.0</version>
+          <hashes>
+            <hash alg="MD5">05508880c34b037f3b48faa4470daa73</hash>
+            <hash alg="SHA-1">3716ad15d9083b6049518c61f316d7d4a87336de</hash>
+            <hash alg="SHA-256">71e875aa6e3c91d64b1554ad3cd745cf0194f892bd6ca13926ea0e78e196c4d4</hash>
+            <hash alg="SHA-512">f1566c1118ad29356fb32f0342b7674edd286d214a61d9320ddc19665332e3313848323360c91d4efca945b2e0dde572ffe475fbfc886d96c544eea3a7d8dec8</hash>
+          </hashes>
+      <licenses></licenses>
+      <purl>pkg:npm/highlightjs-line-numbers.js@2.9.0</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>jquery-serializeObject</name>
+      <version>1.0.0</version>
+          <hashes>
+            <hash alg="MD5">577e08283b6173270c00e91db9d99de9</hash>
+            <hash alg="SHA-1">8ef03d0bd906314dd481cc59ea6b43c2977d1456</hash>
+            <hash alg="SHA-256">967b8a8f89316341e5239c40441da1c615cc25656f2623c4d3185643537830ec</hash>
+            <hash alg="SHA-512">8ffa231350a85069ca1d54667b665b313eccbf0356e45f718bc627e389ab279b25c445df735aee5cd2f02d3f57d497ac37b0bb9fbb1d9774dfcc365febb72802</hash>
+          </hashes>
+      <licenses></licenses>
+      <purl>pkg:npm/jquery-serializeObject@1.0.0</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>lodash</name>
+      <version>4.17.21</version>
+          <hashes>
+            <hash alg="MD5">bbb588cc4360df5d317ebff5f5c1ac9c</hash>
+            <hash alg="SHA-1">03d60d1510d24a952ff370b77035b031a87c4158</hash>
+            <hash alg="SHA-256">4c04561befdf653aef017a42ac5addf68ea943cdfca6bdee5ce04e04e8139f54</hash>
+            <hash alg="SHA-512">da2c021e3ba3f8f99d0b2bdbf3cacc39c87451c290c551e2fe0b009a5d5f3777a0f3620368efdc773cde5d7e221765732087acee9383135fc6d2db37401c2c94</hash>
+          </hashes>
+      <licenses><expression>MIT</expression></licenses>
+      <purl>pkg:npm/lodash@4.17.21</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>markdown-it-checkbox</name>
+      <version>1.1.0</version>
+          <hashes>
+            <hash alg="MD5">058a2470c7886e2821dcc1b1c4aa3d3a</hash>
+            <hash alg="SHA-1">09490640ca3c123699a0207d1ff8f2e048ac81b7</hash>
+            <hash alg="SHA-256">f64a56e9e20326c6c0f0308b2f10fbca587a6c2d5ca731998bf8380cb25776c4</hash>
+            <hash alg="SHA-512">a9d112d1bc529baa6c8dc2f1327e029c39a7fc0eedd40687915c893d4572d8888a14fdebee68798d3843ef4852dccb60cb1b6226a48b4e9b50cff1e89f722a6f</hash>
+          </hashes>
+      <licenses></licenses>
+      <purl>pkg:npm/markdown-it-checkbox@1.1.0</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>nprogress</name>
+      <version>0.2.0</version>
+          <hashes>
+            <hash alg="MD5">2ff16fd3498f09ae82ba23409a9059e4</hash>
+            <hash alg="SHA-1">55980d38b6f24ec91f44579bcd38c667986368c5</hash>
+            <hash alg="SHA-256">408b8700c53202c7c7cffce7c85b345bdf4913eec610c741c9f32dc40861aea2</hash>
+            <hash alg="SHA-512">973ea698176ce19d21267ed037d3ccdded7843aa6eaa6e5e3c17e7408f23775854da64b4f25a8c37fb3a1b454653ff079e927549319e3a7449bd33b3e8c22b78</hash>
+          </hashes>
+      <licenses></licenses>
+      <purl>pkg:npm/nprogress@0.2.0</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>select</name>
+      <version>1.1.0</version>
+          <hashes>
+            <hash alg="MD5">6d10a65187095a8984ea5ac11306e172</hash>
+            <hash alg="SHA-1">3dd72f811c3ec4378c194e7d22ae04b282095c9f</hash>
+            <hash alg="SHA-256">9bd5012cc2c8a6f4447df55f3583b706b1a2426fbfb3d787f20cac5d78d29bde</hash>
+            <hash alg="SHA-512">9a779525d41d59aafaa258ba3f2ba21b8b098b213edc2ef4f6007b37fac23f6d4da27f95400ef39c12719995fe75466e913fe14518752472e7a16627502b55bc</hash>
+          </hashes>
+      <licenses></licenses>
+      <purl>pkg:npm/select@1.1.0</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>sprintf</name>
+      <version>1.0.3</version>
+          <hashes>
+            <hash alg="MD5">00d4d441b7504d293df32b993d6ccd21</hash>
+            <hash alg="SHA-1">5d6555cca822adce55b880d6432b7cb4e986dcb6</hash>
+            <hash alg="SHA-256">8b3e0492f6fe368ec15547f409effc86dd933509e0e6fd49135ab6809b1ebc83</hash>
+            <hash alg="SHA-512">7122f569985daa5522fb3b766ed8bbece0115222c27ef5858e248d961b51f2e55c4ac796e210f434d655e05204166bdd9bcf8cab01356282aca7b8e206a00c50</hash>
+          </hashes>
+      <licenses></licenses>
+      <purl>pkg:npm/sprintf@1.0.3</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>underscore.js</name>
+      <version>1.13.7</version>
+          <hashes>
+            <hash alg="MD5">1cbd21ca52e36a47077477d90df1e88c</hash>
+            <hash alg="SHA-1">70067dd92a6a34fd461c7a3d59072567bc92d5eb</hash>
+            <hash alg="SHA-256">8e3dc41275497173fae82e1b9d60218a6cee9bbd3a9c0a2ec34bdb7678bd8dc5</hash>
+            <hash alg="SHA-512">7fa9c56883c12e9de1364ed8873a513f50e6d82f31edd06b95a2d7f6128654ec720db16639e4239edb7b201ea2e1d08fb917e0fd6a5639743e505d45fcd37ac2</hash>
+          </hashes>
+      <licenses><expression>MIT</expression></licenses>
+      <purl>pkg:npm/underscore@1.13.7</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>underscore.string</name>
+      <version>3.3.6</version>
+          <hashes>
+            <hash alg="MD5">0dd0040b675194ea923d136b85a351a1</hash>
+            <hash alg="SHA-1">9de71cf9bab285cb9efa3df148a531ba0d2f76af</hash>
+            <hash alg="SHA-256">be53b62aaa4f62d6d0252679741c232f9f9bced40bd8dae6de60d50e1cc0df02</hash>
+            <hash alg="SHA-512">38ec84a5cf38e1011b8d5c0225a284e3ce65f74ba9fdeb091ca40d53f02b5b64dde3199df34522937c609c666320431a2106c9c99c2c480a85cc5fb93292fb06</hash>
+          </hashes>
+      <licenses></licenses>
+      <purl>pkg:npm/underscore.string@3.3.6</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>bootstrap-tagsinput</name>
+      <version>0.5.0</version>
+          <hashes>
+            <hash alg="MD5">4835d5fca50e9b33dad6e09ca086d0f6</hash>
+            <hash alg="SHA-1">7e7f71cc50e75f5702f8f653f162f3c7647ec466</hash>
+            <hash alg="SHA-256">d5d765b56d31927026e6d63eceb7b453b79387bb8d76158f973420a67a58b5cf</hash>
+            <hash alg="SHA-512">043c874f889dfa6252066fc779a3a6abb6e09324176f5760477dc3d464fe890c33043a809fba0f233a1a88cb9f96d2c69ad6d7701523472dc1faa1eab10d3fa6</hash>
+          </hashes>
+      <licenses></licenses>
+      <purl>pkg:npm/bootstrap-tagsinput@0.5.0</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>lodash</name>
+      <version>1.0.1</version>
+          <hashes>
+            <hash alg="MD5">27a27d1fb58ea39522fa9a544d6cf19c</hash>
+            <hash alg="SHA-1">287f8835f51b6392917f423f48e2e38a58e64804</hash>
+            <hash alg="SHA-256">addcc6d7dc1b9075a277dfdfc49b21184cc9c351757060313ec3a90784a05ddf</hash>
+            <hash alg="SHA-512">240a19ae3c62492338901b2d6cca87c47a828fc8a81b66cbdd0cf88196ac8d259a523ac6b5bda6d3bde0e11153d4a7b2360eb72c69db600acc0bd23aa6f84ffc</hash>
+          </hashes>
+      <licenses><expression>MIT</expression></licenses>
+      <purl>pkg:npm/lodash@1.0.1</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>markdown-it</name>
+      <version>14.1.0</version>
+          <hashes>
+            <hash alg="MD5">93ffc7617f212adf260e8bcd9bad9027</hash>
+            <hash alg="SHA-1">0dcaeb727c709ae8a9a1b3816a30a401bd930773</hash>
+            <hash alg="SHA-256">433ba2a6946e8200c464d8845b98d826022a1836b4a713f01fa2830477c381e8</hash>
+            <hash alg="SHA-512">7cb8844cea6c90190c9965c445f2d65e2da52de98d81969d1538ae1a7aa0b2c61fc801a759fe4ae44e8a0284036680f160f6337b38d3b5048ff5f7c4fb715e5a</hash>
+          </hashes>
+      <licenses><expression>MIT</expression></licenses>
+      <purl>pkg:npm/markdown-it@14.1.0</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>jquery</name>
+      <version>1.7.2</version>
+          <hashes>
+            <hash alg="MD5">213ba890e802f2adafbbc2355ab6e0ae</hash>
+            <hash alg="SHA-1">89c1654cdc26fe89ac25749b09509973ae828edb</hash>
+            <hash alg="SHA-256">f43121e8466577816a16da77f5b7948aa5496afeac7876a6318d7e967e73cb39</hash>
+            <hash alg="SHA-512">2354a874f2884d1f3f8e5350f8b3e51523b03285a3315d50b6425b0ddd87aefd31f12b7d63d1eb8dfbdc07a7cb4b2a7d9fe77f7ee955e5839014a42a3fb875f3</hash>
+          </hashes>
+      <licenses><expression>MIT</expression></licenses>
+      <purl>pkg:npm/jquery@1.7.2</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>svelte</name>
+      <version>4.2.19</version>
+          <hashes>
+            <hash alg="MD5">0401cfb4db287048e557758639c64616</hash>
+            <hash alg="SHA-1">3d4d75a1c715aae0f5f3733885debef0bfd41f57</hash>
+            <hash alg="SHA-256">242278e706ebe3442ffbd30d6c77780b0715a84c040bbf4f5289b30d65773aff</hash>
+            <hash alg="SHA-512">d19e42fe76505babd1d4c4697b0f66fb92168e5446c7573bd995431b5e408690f27d68d175a52801096964839d30d0919c384fdaa3300127d61b50596a240a6f</hash>
+          </hashes>
+      <licenses><expression>MIT</expression></licenses>
+      <purl>pkg:npm/svelte@4.2.19</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>react</name>
+      <version>16.14.0</version>
+          <hashes>
+            <hash alg="MD5">7219e18f43cf5f06af286fd10b013a6a</hash>
+            <hash alg="SHA-1">c4ecea28355e0cd9d0d0e3cca02a039b27b8b3ac</hash>
+            <hash alg="SHA-256">b751ecbb9e9c2f272d1971d4bb6c15ac0dbd06560f1c799fb04e262dc5a08566</hash>
+            <hash alg="SHA-512">e93ea418f74aa6c680417da0ef15601b504593f4a579221cb5bb9ce041f1995424e2dc6274de109ed8385c17c4e9002959499da8dad6edf7f68f11fb42d0f135</hash>
+          </hashes>
+      <licenses><expression>MIT</expression></licenses>
+      <purl>pkg:npm/react@16.14.0</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>react-dom</name>
+      <version>16.14.0</version>
+          <hashes>
+            <hash alg="MD5">7219e18f43cf5f06af286fd10b013a6a</hash>
+            <hash alg="SHA-1">c4ecea28355e0cd9d0d0e3cca02a039b27b8b3ac</hash>
+            <hash alg="SHA-256">b751ecbb9e9c2f272d1971d4bb6c15ac0dbd06560f1c799fb04e262dc5a08566</hash>
+            <hash alg="SHA-512">e93ea418f74aa6c680417da0ef15601b504593f4a579221cb5bb9ce041f1995424e2dc6274de109ed8385c17c4e9002959499da8dad6edf7f68f11fb42d0f135</hash>
+          </hashes>
+      <licenses><expression>MIT</expression></licenses>
+      <purl>pkg:npm/react-dom@16.14.0</purl>
+      <modified>false</modified>
+    </component>
+    <component type="library">
+      <name>scheduler</name>
+      <version>0.19.1</version>
+          <hashes>
+            <hash alg="MD5">7219e18f43cf5f06af286fd10b013a6a</hash>
+            <hash alg="SHA-1">c4ecea28355e0cd9d0d0e3cca02a039b27b8b3ac</hash>
+            <hash alg="SHA-256">b751ecbb9e9c2f272d1971d4bb6c15ac0dbd06560f1c799fb04e262dc5a08566</hash>
+            <hash alg="SHA-512">e93ea418f74aa6c680417da0ef15601b504593f4a579221cb5bb9ce041f1995424e2dc6274de109ed8385c17c4e9002959499da8dad6edf7f68f11fb42d0f135</hash>
+          </hashes>
+      <licenses><expression>MIT</expression></licenses>
+      <purl>pkg:npm/scheduler@0.19.1</purl>
+      <modified>false</modified>
+    </component>
+  </components>
+</bom>
