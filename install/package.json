@@ -15,7 +15,8 @@
     "test": "nyc --reporter=html --reporter=text-summary mocha",
     "coverage": "nyc report --reporter=text-lcov > ./coverage/lcov.info",
     "coveralls": "nyc report --reporter=text-lcov | coveralls && rm -r coverage",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "security-check": "snyk test"
   },
   "nyc": {
     "exclude": [
@@ -175,7 +176,8 @@
     "mockdate": "3.0.5",
     "nyc": "17.1.0",
     "smtp-server": "3.13.6",
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "snyk": "^1.1300.1"
   },
   "optionalDependencies": {
     "sass-embedded": "1.88.0"
