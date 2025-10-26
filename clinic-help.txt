@@ -1,0 +1,46 @@
+
+  [37m[1m[4mClinic[24m[22m[39m - v13.0.0
+
+  [36m[1mGetting started[22m[39m
+  As a first step, run the [33mclinic doctor[39m:
+
+    [33mclinic doctor -- node server.js[39m
+
+  Then benchmark your server with [33mwrk[39m or [33mautocannon[39m:
+
+    [33mwrk http://localhost:3000[39m
+    [33mautocannon http://localhost:3000[39m
+
+  Finally shut down your server (Ctrl+C). Once the server process has shutdown
+  [33mclinic doctor[39m will analyse the collected data and detect what type of issue
+  you are having. Based on the issue type, it will provide a recommendation for
+  you.
+
+  For example, to debug I/O issues, use [33mclinic bubbleprof[39m:
+
+    [33mclinic bubbleprof -- node server.js[39m
+
+  Then benchmark your server again, just like you did with [33mclinic doctor[39m.
+
+  [36m[1mReport an issue[22m[39m
+  If you encounter any issue, feel free to send us an issue report at:
+
+    [4mhttps://github.com/clinicjs/node-clinic/issues[24m
+
+  [36m[1mUtilities[22m[39m
+  When using Clinic.js a bunch you have fill up your directory with data folders and files.
+  You can clean these easily using [33mclinic clean[39m.
+
+  [36m[1mMore information[22m[39m
+  For information on the Clinic.js sub-commands, use the [33m--help[39m option:
+
+    [33mclinic doctor --help[39m
+    [33mclinic bubbleprof --help[39m
+    [33mclinic clean --help[39m
+    [33mclinic flame --help[39m
+    [33mclinic heapprofiler --help[39m
+
+  [36m[1mFlags[22m[39m
+  -h | --help                Display Help
+  -v | --version             Display Version
+
