@@ -260,6 +260,9 @@ Plugins.normalise = async function (apiReturn) {
 		}
 		return 0;
 	});
+        pluginArray.forEach(p => {
+                p.url = p.url || '';
+        });
 
 	return pluginArray;
 };
