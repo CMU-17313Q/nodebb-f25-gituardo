@@ -1,11 +1,11 @@
 'use strict';
-
+import bootbox from 'bootbox';
 
 define('forum/post-queue', [
-	'categoryFilter', 'categorySelector', 'api', 'alerts', 'bootbox',
+	'categoryFilter', 'categorySelector', 'api', 'alerts',
 	'accounts/moderate', 'accounts/delete',
 ], function (
-	categoryFilter, categorySelector, api, alerts, bootbox,
+	categoryFilter, categorySelector, api, alerts,
 	AccountModerate, AccountsDelete
 ) {
 	const PostQueue = {};

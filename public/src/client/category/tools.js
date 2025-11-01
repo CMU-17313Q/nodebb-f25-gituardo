@@ -1,15 +1,14 @@
 
 'use strict';
-
+import bootbox from 'bootbox';
 
 define('forum/category/tools', [
 	'topicSelect',
 	'forum/topic/threadTools',
 	'components',
 	'api',
-	'bootbox',
 	'alerts',
-], function (topicSelect, threadTools, components, api, bootbox, alerts) {
+], function (topicSelect, threadTools, components, api, alerts) {
 	const CategoryTools = {};
 
 	CategoryTools.init = function () {

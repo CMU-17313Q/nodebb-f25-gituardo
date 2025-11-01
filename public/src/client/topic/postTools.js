@@ -1,5 +1,5 @@
 'use strict';
-
+import bootbox from 'bootbox';
 
 define('forum/topic/postTools', [
 	'share',
@@ -8,11 +8,10 @@ define('forum/topic/postTools', [
 	'translator',
 	'forum/topic/votes',
 	'api',
-	'bootbox',
 	'alerts',
 	'hooks',
 	'helpers',
-], function (share, navigator, components, translator, votes, api, bootbox, alerts, hooks, helpers) {
+], function (share, navigator, components, translator, votes, api, alerts, hooks, helpers) {
 	const PostTools = {};
 
 	let staleReplyAnyway = false;
