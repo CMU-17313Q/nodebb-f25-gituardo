@@ -1,10 +1,10 @@
 'use strict';
-
+import bootbox from 'bootbox';
 window.$ = require('jquery');
 
 window.jQuery = window.$;
 require('bootstrap');
-window.bootbox = require('bootbox');
+
 require('jquery-form');
 window.utils = require('./utils');
 require('timeago');
@@ -131,7 +131,7 @@ if (document.readyState === 'loading') {
 			let _module;
 			try {
 				switch (moduleName) {
-					case 'bootbox': return require('bootbox');
+					case 'bootbox': return bootbox;
 					case 'benchpressjs': return require('benchpressjs');
 					case 'clipboard': return require('clipboard');
 				}
