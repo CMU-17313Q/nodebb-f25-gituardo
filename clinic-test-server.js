@@ -21,6 +21,14 @@ const server = http.createServer((req, res) => {
 	}
 });
 
-server.listen(0, () => {
-	console.log('Clinic.js test server running on port', server.address().port);
+const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
+
+server.listen(PORT, () => {
+  console.log('Clinic.js test server running on port', PORT);
 });
+
+process.on('SIGINT', () => {
+  server.close(() => process.exit(0));
+});
+
+
