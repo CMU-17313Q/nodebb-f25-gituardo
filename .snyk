@@ -1,0 +1,45 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.1
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  SNYK-JS-BOOTBOX-174704:
+    - '*':
+        reason: No patch available
+        expires: 2025-12-30T00:00:00.000Z
+        created: 2025-11-02T11:32:15.369Z
+  SNYK-JS-ELLIPTIC-8187303:
+    - '*':
+        reason: No patch available
+        expires: 2025-12-30T00:00:00.000Z
+        created: 2025-11-02T11:32:19.979Z
+  SNYK-JS-JQUERYFORM-574783:
+    - '*':
+        reason: No patch available
+        expires: 2025-12-30T00:00:00.000Z
+        created: 2025-11-02T11:32:26.089Z
+  SNYK-JS-MULTER-10185673:
+    - '*':
+        reason: No patch available
+        expires: 2025-12-30T00:00:00.000Z
+        created: 2025-11-02T11:32:30.940Z
+  SNYK-JS-MULTER-10185675:
+    - '*':
+        reason: No patch available
+        expires: 2025-12-30T00:00:00.000Z
+        created: 2025-11-02T11:32:34.753Z
+  SNYK-JS-MULTER-10299078:
+    - '*':
+        reason: No patch available
+        expires: 2025-12-30T00:00:00.000Z
+        created: 2025-11-02T11:32:38.579Z
+  SNYK-JS-MULTER-10773732:
+    - '*':
+        reason: No patch available
+        expires: 2025-12-30T00:00:00.000Z
+        created: 2025-11-02T11:32:42.283Z
+  SNYK-JS-ZXCVBN-3257741:
+    - '*':
+        reason: No patch available
+        expires: 2025-12-30T00:00:00.000Z
+        created: 2025-11-02T11:32:45.952Z
+patch: {}
