@@ -53,6 +53,11 @@ jobs:
         with:
           useLockFile: false
 
+      - name: Snyk vulnerabilities check
+        run: npm run security-check
+        env: 
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
       - name: Setup on Redis
         env:
           SETUP: >-
