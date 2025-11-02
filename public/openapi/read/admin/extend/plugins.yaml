@@ -267,11 +267,7 @@ get:
                           type: boolean
                       required:
                         - name
-                        - updated
                         - latest
-                        - url
-                        - numInstalls
-                        - isCompatible
                         - id
                         - installed
                         - active
