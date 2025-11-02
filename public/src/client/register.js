@@ -1,9 +1,9 @@
 'use strict';
-
+import bootbox from 'bootbox';
 
 define('forum/register', [
-	'translator', 'slugify', 'api', 'bootbox', 'forum/login', 'zxcvbn', 'jquery-form',
-], function (translator, slugify, api, bootbox, Login, zxcvbn) {
+	'translator', 'slugify', 'api', 'forum/login', 'zxcvbn', 'jquery-form',
+], function (translator, slugify, api, Login, zxcvbn) {
 	const Register = {};
 	let validationError = false;
 	const successIcon = '';

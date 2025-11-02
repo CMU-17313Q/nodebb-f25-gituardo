@@ -13,7 +13,7 @@ import {
 } from 'chart.js';
 
 import * as Benchpress from 'benchpressjs';
-import * as bootbox from 'bootbox';
+import bootbox from 'bootbox';
 import * as alerts from '../modules/alerts';
 import * as translator from '../modules/translator';
 import { formattedNumber } from '../modules/helpers';
