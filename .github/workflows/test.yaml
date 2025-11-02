@@ -85,6 +85,9 @@ jobs:
       - name: Node tests
         run: npm test
 
+      - name: Snyk vulnerabilities check
+        run: npm run security-check
+
       - name: Extract coverage info
         run: npm run coverage
 
