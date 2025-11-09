@@ -29,7 +29,7 @@ module.exports = function (Posts) {
 		}
 
 		const pid = data.pid || await db.incrObjectField('global', 'nextPid');
-                const [isEnglish, translatedContent] = await translate.translate(data);
+				const [isEnglish, translatedContent] = await translate.translate(data);
 		let postData = { pid, uid, tid, content, sourceContent, timestamp, isEnglish, translatedContent };
 
 		if (data.toPid) {
