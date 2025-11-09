@@ -198,7 +198,7 @@ PostDataObject:
         isEnglish:
           type: boolean 
         translatedContent:
-					type: string                     
+          type: string
         timestamp:
           type: number
         endorsed:
