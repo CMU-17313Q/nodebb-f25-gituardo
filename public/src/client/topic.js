@@ -479,7 +479,23 @@ define('forum/topic', [
 			alerts.remove('bookmark');
 		}
 	}
-
-
+        function configurePostToggles() {
+          $('.topic').on('click', '.view-translated-btn', function (e) {
+	    e.preventDefault();
+		
+	    const translatedContent = $(this).closest('.sensitive-content-message').next('.translated-content');
+		
+	    translatedContent.toggle();
+		
+	    if (translatedContent.is(':visible')) {
+	      $(this).text('Hide the translated message.');
+	    } else {
+	      $(this).text('Click here to view the translated message.');
+	    }
+          });
+        }
+        $(document).ready(function() {
+          configurePostToggles();
+        });
 	return Topic;
 });

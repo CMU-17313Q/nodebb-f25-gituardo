@@ -125,6 +125,15 @@
 			{posts.content}
 		</div>
 
+                {{{ if ./posts.isEnglish }}}
+                <div class="sensitive-content-message">
+                    <a class="btn btn-sm btn-primary view-translated-btn">Click here to view the translated message.</a>
+                </div>
+                <div class="translated-content" style="display:none;">
+                    {posts.translatedContent}
+                </div>
+                {{{ end }}}
+
 		<!-- Reaction bar -->
 		<div class="reaction-bar" data-pid="{{./pid}}">
     		<button class="reaction {{ if ./userReaction == 'like' }}reacted{{ end }}" data-type="like">

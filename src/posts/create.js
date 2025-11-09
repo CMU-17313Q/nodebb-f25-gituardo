@@ -3,6 +3,7 @@
 const meta = require('../meta');
 const db = require('../database');
 const plugins = require('../plugins');
+const translate = require('../translate');
 const user = require('../user');
 const topics = require('../topics');
 const categories = require('../categories');
@@ -28,7 +29,8 @@ module.exports = function (Posts) {
 		}
 
 		const pid = data.pid || await db.incrObjectField('global', 'nextPid');
-		let postData = { pid, uid, tid, content, sourceContent, timestamp };
+                const [isEnglish, translatedContent] = await translate.translate(data);
+		let postData = { pid, uid, tid, content, sourceContent, timestamp, isEnglish, translatedContent };
 
 		if (data.toPid) {
 			postData.toPid = data.toPid;
