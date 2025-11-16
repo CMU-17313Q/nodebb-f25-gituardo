@@ -125,11 +125,12 @@
 			{posts.content}
 		</div>
 
-                {{{ if ./posts.isEnglish }}}
-                <div class="sensitive-content-message">
-                    <a class="btn btn-sm btn-primary view-translated-btn">Click here to view the translated message.</a>
+                {{{ if !posts.isEnglish }}}
+                <div class="sensitive-content-message mt-2">
+                    <button type="button" class="btn btn-sm btn-primary view-translated-btn">Click here to view the translated message.</button>
                 </div>
-                <div class="translated-content" style="display:none;">
+                <div class="translated-content hidden" style="padding: 10px; background: #f0f0f0; margin-top: 10px; border-radius: 5px;">
+                    <strong>Translation:</strong><br>
                     {posts.translatedContent}
                 </div>
                 {{{ end }}}

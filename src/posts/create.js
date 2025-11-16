@@ -29,7 +29,22 @@ module.exports = function (Posts) {
 		}
 
 		const pid = data.pid || await db.incrObjectField('global', 'nextPid');
-		const [isEnglish, translatedContent] = await translate.translate(data);
+		// Safely call translate.translate — make failures non-fatal and log useful info.
+		let isEnglish = true;
+		let translatedContent = '';
+		try {
+			const res = await translate.translate(data);
+			if (Array.isArray(res)) {
+				isEnglish = res[0] === undefined ? true : res[0];
+				translatedContent = res[1] || '';
+			} else if (res && typeof res === 'object') {
+				isEnglish = res.isEnglish === undefined ? isEnglish : res.isEnglish;
+				translatedContent = res.translated || res.translatedContent || translatedContent;
+			}
+			
+		} catch (err) {
+			console.error('[translate] error calling translate.translate:', err);
+		}
 		let postData = { pid, uid, tid, content, sourceContent, timestamp, isEnglish, translatedContent };
 
 		if (data.toPid) {

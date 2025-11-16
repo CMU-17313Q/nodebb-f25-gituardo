@@ -485,12 +485,12 @@ define('forum/topic', [
 		
 			const translatedContent = $(this).closest('.sensitive-content-message').next('.translated-content');
 		
-			translatedContent.toggle();
+			translatedContent.toggleClass('hidden');
 		
-			if (translatedContent.is(':visible')) {
-				$(this).text('Hide the translated message.');
-			} else {
+			if (translatedContent.hasClass('hidden')) {
 				$(this).text('Click here to view the translated message.');
+			} else {
+				$(this).text('Hide the translated message.');
 			}
 		});
 	}
