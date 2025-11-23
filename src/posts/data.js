@@ -103,7 +103,14 @@ function modifyPost(post, fields) {
 		if (!fields.length || fields.includes('attachments')) {
 			post.attachments = (post.attachments || '').split(',').filter(Boolean);
 		}
-		post.isEnglish = post.isEnglish == 'true' || post.isEnglish === undefined;
+		// Parse isEnglish as boolean - handle string 'true'/'false' from Redis
+		if (post.isEnglish === undefined) {
+			post.isEnglish = true; // default to English if not set
+		} else if (typeof post.isEnglish === 'string') {
+			post.isEnglish = post.isEnglish === 'true';
+		} else {
+			post.isEnglish = !!post.isEnglish;
+		}
 		// If translatedContent is undefined, default to empty string (no translation needed for English posts)
 		if (post.translatedContent === undefined) {
 			post.translatedContent = '';

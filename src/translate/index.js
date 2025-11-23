@@ -39,7 +39,6 @@ translatorApi.translate = async function (postData) {
 		const data = await response.json();
 		const isEnglish = !!data.is_english;
 		const translated = data.translated_content ?? data.translated ?? '';
-		console.log('[translate] Flask API response:', { is_english: data.is_english, isEnglish, translated_length: translated.length });
 		return [isEnglish, translated];
 	} catch (error) {
 		console.error('Translation API error:', error);

@@ -69,6 +69,7 @@ define('forum/topic', [
 		setupQuickReply();
 		handleBookmark(tid);
 		handleThumbs();
+		configurePostToggles();
 
 		$(window).on('scroll', utils.debounce(updateTopicTitle, 250));
 
@@ -494,8 +495,6 @@ define('forum/topic', [
 			}
 		});
 	}
-	$(document).ready(function () {
-		configurePostToggles();
-	});
+	
 	return Topic;
 });
